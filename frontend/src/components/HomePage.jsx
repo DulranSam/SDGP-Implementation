@@ -41,7 +41,7 @@ const HomePage = (props) => {
             ace your A-Levels like a Champ 🏆
           </h2>
           <button>
-            <Link path="/adduser">Click Here to Register</Link>
+            <Link to="/adduser">Click Here to Register</Link>
           </button>
         </div>
       )}

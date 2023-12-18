@@ -7,7 +7,9 @@ import AddPure from "./components/AddPure";
 import ViewUsers from "./components/Users/ViewUsers";
 import "./App.css";
 import CreateUsers from "./components/Users/CreateUsers";
+import Forum from "./components/Forum/Forum";
 import { useState } from "react";
+import CreateQuestion from "./components/Forum/CreateQuestion";
 
 function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
@@ -38,6 +40,11 @@ function App() {
             }
           ></Route>
           <Route path="/viewusers" element={<ViewUsers></ViewUsers>}></Route>
+          <Route path="/forum" element={<Forum></Forum>}></Route>
+          <Route
+            path="/createforum"
+            element={<CreateQuestion></CreateQuestion>}
+          ></Route>
         </Routes>
       </BrowserRouter>
     </>

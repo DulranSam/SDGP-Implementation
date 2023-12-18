@@ -67,6 +67,10 @@ const Forum = () => {
               </form>
             </div>
           ))}
+      <h1>
+        As of right now this , nothing will be displayed as there's nothing in
+        the collection
+      </h1>
     </div>
   );
 };

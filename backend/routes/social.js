@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const forumModel = require("../models/forum");
+const socialController = require("../controllers/SocialController");
 
 router
   .route("/")
-  .get(async (req, res) => {
-    const forumData = await forumModel.find();
-    res.json(forumData);
-  })
+  .get(socialController.GetUsers)
   .post((req, res) => {
     const { question } = req.body;
     if (!question)
