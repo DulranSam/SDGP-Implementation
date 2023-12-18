@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 
 const AddStat = () => {
@@ -7,25 +8,28 @@ const AddStat = () => {
     topic: "",
     question: "",
   });
+  const [status, setStatus] = useState("");
 
   const topicRef = useRef();
   const questionRef = useRef();
 
-  async function AddQuestion() {
+  async function AddQuestion(e) {
+    e.preventDefault();
     try {
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/admin/pure", {
-        data: {
-          topic: data.topic,
-          question: data.question,
-        },
+        topic: data.topic,
+        question: data.question,
+      }).then((r) => {
+        if (r.status === 200) {
+          setStatus("Question Added");
+        }
       });
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
-      topicRef.current.value = "";
-      questionRef.current.value = "";
+      setData({ topic: "", question: "" });
     }
   }
 
@@ -48,8 +52,10 @@ const AddStat = () => {
           placeholder="Enter Question..."
         ></input>
         <button type="submit" disabled={loading}>
+          <p>{status ? status : ""}</p>
           {loading ? "Loading..." : "Add User"}
         </button>
+        <Link to="/"></Link>
       </form>
     </div>
   );

@@ -1,40 +1,49 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 
-const AddPure = () => {
+const AddStat = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     topic: "",
     question: "",
   });
+  const [status, setStatus] = useState("");
 
   const topicRef = useRef();
   const questionRef = useRef();
 
-  async function AddQuestion() {
+  async function AddQuestion(e) {
+    e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/admin/pure", {
-        data: {
-          topic: data.topic,
-          question: data.question,
-        },
+
+      const { topic, question } = data;
+
+      const response = await Axios.post("http://localhost:8000/admin/pure", {
+        topic: topic,
+        question: question,
       });
+
+      if (response.status === 200) {
+        setStatus("Question Added");
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Error adding question:", err);
     } finally {
       setLoading(false);
-      topicRef.current.value = "";
-      questionRef.current.value = "";
+
+      setData({ topic: "", question: "" });
     }
   }
 
   return (
     <div>
-      <h1>Add Pure Maths Questions</h1>
+      <h1>Add Statistics Questions</h1>
       <form onSubmit={AddQuestion}>
         <input
           ref={topicRef}
+          value={data.topic}
           onChange={(e) => {
             setData({ ...data, topic: e.target.value });
           }}
@@ -42,17 +51,20 @@ const AddPure = () => {
         ></input>
         <input
           ref={questionRef}
+          value={data.question}
           onChange={(e) => {
             setData({ ...data, question: e.target.value });
           }}
           placeholder="Enter Question..."
         ></input>
         <button type="submit" disabled={loading}>
+          <p>{status}</p>
           {loading ? "Loading..." : "Add User"}
         </button>
+        <Link to="/">Go Back</Link>
       </form>
     </div>
   );
 };
 
-export default AddPure;
+export default AddStat;

@@ -28,9 +28,7 @@ router
           question,
         });
         await statisticsData.save();
-        return res
-          .status(200)
-          .json({ Alert: "Added Question and created topic" });
+        return res.status(200).json({ Alert: "Added Question" });
       } else {
         await statisticsModel.updateOne(
           { topic: topic },
@@ -71,9 +69,7 @@ router
           question,
         });
         await statisticsData.save();
-        return res
-          .status(200)
-          .json({ Alert: "Added Question and created topic" });
+        return res.status(200).json({ Alert: "Added Question" });
       } else {
         return res.status(400).json({ Alert: "Question already exists" });
       }
