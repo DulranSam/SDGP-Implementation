@@ -36,6 +36,7 @@ const StatPage = () => {
               <p>{x?.topic}</p>
               <br></br>
               <Link to="/addstat">Add Questions</Link>
+              <Link to="/">Back to Homepage?</Link>
             </div>
           ))}
     </div>

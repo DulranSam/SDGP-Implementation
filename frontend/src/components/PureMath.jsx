@@ -37,6 +37,7 @@ const PureMath = () => {
                 <p>{x?.topic}</p>
                 <br></br>
                 <Link to="/addpure">Add Pure Maths Questions</Link>
+                <Link to="/">Back to Homepage?</Link>
               </div>
             ))}
       </p>

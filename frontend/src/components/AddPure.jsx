@@ -59,9 +59,9 @@ const AddStat = () => {
         ></input>
         <button type="submit" disabled={loading}>
           <p>{status}</p>
-          {loading ? "Loading..." : "Add User"}
+          {loading ? "Loading..." : "Add Question"}
         </button>
-        <Link to="/">Go Back</Link>
+        <Link to="/">Back to Homepage?</Link>
       </form>
     </div>
   );

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Axios from "axios";
 
-const CreateUsers = () => {
+const CreateUsers = (props) => {
+  const { setUser, user, isLogged } = props;
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -14,6 +15,9 @@ const CreateUsers = () => {
     e.preventDefault();
     const { username, password, mail } = data;
     try {
+      if (status !== "") {
+        setStatus("");
+      }
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/user", {
         data: {
@@ -23,7 +27,11 @@ const CreateUsers = () => {
         },
       }).then((r) => {
         if (r.status === 200) {
-          setStatus(`Account Created`);
+          setStatus("Account Created");
+          setUser({ ...user, username, password }); //overriding username and password
+          isLogged(true);
+        } else if (r.status === 409) {
+          setStatus("Username is taken , please try again");
         }
       });
     } catch (err) {

@@ -1,0 +1,1 @@
+make the routes cleaner by adding the functions inside controllers , then export them and import in the routes file and route accordingly
