@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 const PureMath = () => {
   const [data, setData] = useState([]);
@@ -32,6 +33,12 @@ const PureMath = () => {
           ? "Loading..."
           : data.map((x, index) => (
               <div key={x._id || index}>
+                <div className="question">
+                  <MathJaxContext>
+                    <MathJax>{"\\(\\frac{10}{4x} \\approx 2^{12}\\)"}</MathJax>
+                    {/**Testing Math Jax */}
+                  </MathJaxContext>
+                </div>
                 <p>{x._id}</p>
                 <h1>{x?.question}</h1>
                 <p>{x?.topic}</p>

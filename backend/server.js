@@ -7,6 +7,7 @@ const cors = require("cors");
 const adminPage = require("./routes/admin");
 const mongoose = require("mongoose");
 const users = require("./routes/users");
+const social = require("./routes/social");
 const { join } = require("path");
 const fs = require("fs");
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use("/admin", adminPage);
 app.use("/users", users);
+app.use("/social", social);
 
 //anything below this is an unknown path , 404
 if (!fs.existsSync(join(__dirname, "views"))) {
