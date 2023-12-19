@@ -17,6 +17,10 @@ app.use(cors());
 app.use("/admin", adminPage);
 app.use("/users", users);
 app.use("/social", social);
+if (!fs.existsSync(join(__dirname, "public"))) {
+  fs.mkdirSync(join(__dirname, "public"));
+}
+app.use(express.static(join(__dirname, "public"))); //store everything here
 
 //anything below this is an unknown path , 404
 if (!fs.existsSync(join(__dirname, "views"))) {

@@ -8,32 +8,37 @@ const CreateUsers = (props) => {
     username: "",
     password: "",
     mail: "",
+    photo: null,
   });
   const [status, setStatus] = useState("");
 
   async function CreateUser(e) {
     e.preventDefault();
-    const { username, password, mail } = data;
+    const { username, password, mail, photo } = data;
     try {
       if (status !== "") {
         setStatus("");
       }
+
+      const form = new FormData();
+      form.append("username", username);
+      form.append("password", password);
+      form.append("mail", mail);
+      form.append("photo", photo);
+
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/user", {
-        data: {
-          username,
-          password,
-          mail,
-        },
-      }).then((r) => {
-        if (r.status === 200) {
-          setStatus("Account Created");
-          setUser({ ...user, username, password }); //overriding username and password
-          isLogged(true);
-        } else if (r.status === 409) {
-          setStatus("Username is taken , please try again");
-        }
+      const response = await Axios.post("http://localhost:8000/users", form, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
+
+      if (response.status === 200) {
+        setStatus("Account Created");
+
+        setUser({ ...user });
+        isLogged(true);
+      } else if (response.status === 409) {
+        setStatus("Username is taken, please try again");
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -43,37 +48,41 @@ const CreateUsers = (props) => {
 
   return (
     <div>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <div>
-          <h1>Register</h1>
-          <form onSubmit={CreateUser}>
-            <input
-              onChange={(e) => {
-                setData({ ...data, username: e.target.value });
-              }}
-              placeholder="Enter Username"
-            ></input>
-            <input
-              onChange={(e) => {
-                setData({ ...data, password: e.target.value });
-              }}
-              placeholder="Enter password"
-            ></input>
-            <input
-              onChange={(e) => {
-                setData({ ...data, mail: e.target.value });
-              }}
-              placeholder="Enter mail"
-            ></input>
-            <button type="submit" disabled={loading}>
-              {loading ? "Loading..." : "Create User"}
-            </button>
-          </form>
-          {status}
-        </div>
-      )}
+      <h1>Register</h1>
+      <br></br>
+      <form onSubmit={CreateUser}>
+        <input
+          onChange={(e) => {
+            setData({ ...data, username: e.target.value });
+          }}
+          placeholder="Enter Username"
+          type="text"
+        ></input>
+        <input
+          onChange={(e) => {
+            setData({ ...data, password: e.target.value });
+          }}
+          placeholder="Enter password"
+          type="password"
+        ></input>
+        <input
+          onChange={(e) => {
+            setData({ ...data, mail: e.target.value });
+          }}
+          placeholder="Enter mail"
+          type="email"
+        ></input>
+        <input
+          onChange={(e) => {
+            setData({ ...data, photo: e.target.files[0] });
+          }}
+          type="file"
+        ></input>
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Create User"}
+        </button>
+      </form>
+      <p>{status}</p>
     </div>
   );
 };

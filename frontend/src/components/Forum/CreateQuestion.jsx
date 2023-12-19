@@ -14,7 +14,7 @@ const CreateQuestion = () => {
       }
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/social", {
-        data: { question },
+        question,
       }).then((r) => {
         if (r.status === 200) {
           setStatus("Question Added");
@@ -29,7 +29,7 @@ const CreateQuestion = () => {
   }
 
   return (
-    <div>
+    <div className="container-fluid">
       <form onSubmit={AddQuestion}>
         <input
           onChange={(e) => {

@@ -33,7 +33,7 @@ const HomePage = (props) => {
           </button>
         </div>
       ) : (
-        <div>
+        <div className="container-fluid">
           <h1>Good {time}!, Welcome to (CS63 Platform Name)!</h1>
           <h2 style={{ margin: "5%" }}>
             Our platform hopes to help you improve your maths skills , with the
@@ -41,7 +41,20 @@ const HomePage = (props) => {
             ace your A-Levels like a Champ 🏆
           </h2>
           <button>
-            <Link to="/adduser">Click Here to Register</Link>
+            <button>
+              <Link to="/adduser">Click Here to Register</Link>
+            </button>
+            <button>
+              <Link to="/login">
+                Already have an account? Click here to login ✨
+              </Link>
+            </button>
+            <button>
+              <Link to="/stat">StatPage</Link>
+            </button>
+            <button>
+              <Link to="/puremath">PureMath</Link>
+            </button>
           </button>
         </div>
       )}

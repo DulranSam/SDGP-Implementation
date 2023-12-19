@@ -1,5 +1,7 @@
 const userData = require("../models/users");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+const { join } = require("path");
 
 async function Users(req, res) {
   const users = await userData.find();
@@ -8,7 +10,7 @@ async function Users(req, res) {
 
 async function CreateUsers(req, res) {
   try {
-    const { username, password, mail } = req.body;
+    const { username, password, mail, photo } = req.body;
     if (!username || !password || !mail) {
       return res
         .status(400)
@@ -17,11 +19,19 @@ async function CreateUsers(req, res) {
 
     const userExists = await userData.findOne({ username: username });
     if (!userExists) {
+      let savedPhoto;
+      if (req.file) {
+        savedPhoto = fs.writeFileSync(
+          join(__dirname, "public", "userpfps", photo)
+        );
+      }
+
       const hashedPWD = bcrypt.hashSync(password, 10);
       const newUser = new userData({
         username,
         password: hashedPWD,
         mail,
+        photo,
       });
       await newUser.save();
       return res.status(200).json({ Alert: `${username} Created` });

@@ -10,6 +10,7 @@ import CreateUsers from "./components/Users/CreateUsers";
 import Forum from "./components/Forum/Forum";
 import { useState } from "react";
 import CreateQuestion from "./components/Forum/CreateQuestion";
+import Login from "./components/Users/Login";
 
 function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
@@ -45,6 +46,7 @@ function App() {
             path="/createforum"
             element={<CreateQuestion></CreateQuestion>}
           ></Route>
+          <Route path="/login" element={<Login></Login>}></Route>
         </Routes>
       </BrowserRouter>
     </>
