@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 
 const CreateQuestion = () => {
   const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [data, setData] = useState([]);
 
   async function AddQuestion(e) {
     e.preventDefault();
@@ -20,6 +23,7 @@ const CreateQuestion = () => {
           setStatus("Question Added");
         }
       });
+      window.location.reload();
     } catch (err) {
       setStatus("Error Occured, please try again");
       console.error(err);
@@ -28,21 +32,83 @@ const CreateQuestion = () => {
     }
   }
 
+  async function AnsweringQuestions(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const r = await Axios.post("");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function GetQuestions() {
+    try {
+      if (status !== "") {
+        setStatus("");
+      }
+      setLoading(true);
+      const r = await Axios.get("http://localhost:8000/social")
+        .then((r) => {
+          setData(r.data);
+        })
+        .catch((e) => {
+          console.log(e.response.data);
+        });
+    } catch (err) {
+      setStatus("Error Occured, please try again");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    GetQuestions();
+  }, []);
+
   return (
     <div className="container-fluid">
-      <form onSubmit={AddQuestion}>
-        <input
-          onChange={(e) => {
-            setQuestion(e.target.value);
-          }}
-          placeholder="Enter your question"
-          type="text"
-        ></input>
-        <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Add Question"}
-        </button>
-        {status}
-      </form>
+      {loading ? (
+        "Loading..."
+      ) : (
+        <div>
+          <form onSubmit={AddQuestion}>
+            <input
+              onChange={(e) => {
+                setQuestion(e.target.value);
+              }}
+              placeholder="Enter your question"
+              type="text"
+            ></input>
+            <button type="submit" disabled={loading}>
+              {loading ? "Loading..." : "Add Question"}
+            </button>
+            {status}
+          </form>
+          <div>
+            {data && data.length ? (
+              data.map((x, index) => (
+                <div key={x._id || index}>
+                  <h1>{x.question}</h1>
+                </div>
+              ))
+            ) : (
+              <h1>No questions available</h1>
+            )}
+          </div>
+          <form onSubmit={AnsweringQuestions}>
+            <input
+              onChange={(e) => {
+                setAnswer(e.target.value);
+              }}
+            ></input>
+          </form>
+          <Link to="/forum">Forum Page</Link>
+        </div>
+      )}
     </div>
   );
 };

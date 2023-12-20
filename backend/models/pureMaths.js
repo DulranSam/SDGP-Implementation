@@ -15,5 +15,5 @@ const pureMathsSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const pureMathsModel = mongoose.model("pureMaths", pureMathsSchema);
+const pureMathsModel = mongoose.model("puremaths", pureMathsSchema);
 module.exports = pureMathsModel;

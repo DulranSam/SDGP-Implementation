@@ -65,6 +65,7 @@ const Forum = () => {
                   {loading ? "Loading..." : "Submit"}
                 </button>
               </form>
+              {status}
             </div>
           ))}
       <h1>

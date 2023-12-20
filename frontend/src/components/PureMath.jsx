@@ -10,11 +10,8 @@ const PureMath = () => {
   async function SearchQuestion() {
     try {
       setLoading(true);
-      const r = await Axios.get("http://localhost:8000/admin/pure").then(
-        (r) => {
-          setData(r.data);
-        }
-      );
+      const r = await Axios.get("http://localhost:8000/admin/pure");
+      setData(r.data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -29,25 +26,27 @@ const PureMath = () => {
   return (
     <div>
       <p>
-        {loading
-          ? "Loading..."
-          : data.map((x, index) => (
-              <div key={x._id || index}>
-                <div className="question">
-                  <MathJaxContext>
-                    <MathJax>{"\\(\\frac{10}{4x} \\approx 2^{12}\\)"}</MathJax>
-                    {/**Testing Math Jax */}
-                  </MathJaxContext>
-                </div>
-                <p>{x._id}</p>
-                <h1>{x?.question}</h1>
-                <p>{x?.topic}</p>
-                <br></br>
-                <Link to="/addpure">Add Pure Maths Questions</Link>
-                <Link to="/">Back to Homepage?</Link>
-              </div>
-            ))}
+        {loading ? (
+          "Loading..."
+        ) : data && data.length ? (
+          data.map((x, index) => (
+            <div key={x._id || index}>
+              <div className="question"></div>
+              <h1>{x.question}</h1>
+              <p>{x.topic}</p>
+              <br></br>
+            </div>
+          ))
+        ) : (
+          <p>No results found</p>
+        )}
+        <Link to="/puremath/addpure">Add Pure Maths Questions</Link>
+        <Link to="/">Back to Homepage?</Link>
       </p>
+      <MathJaxContext>
+        <MathJax>{"$$(2 x-3)^2-\\frac{4}{(2 x-3)^2}-3=0 .$$"}</MathJax>
+        {/**Testing Math Jax */}
+      </MathJaxContext>
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Axios from "axios";
 
 const StatPage = () => {
@@ -9,13 +10,10 @@ const StatPage = () => {
   async function SearchQuestion() {
     try {
       setLoading(true);
-      const r = await Axios.get("http://localhost:8000/admin/stat").then(
-        (r) => {
-          setData(r.data);
-        }
-      );
-    } catch (err) {
-      console.error(err);
+      const response = await Axios.get("http://localhost:8000/admin/stat");
+      setData(response.data);
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -31,12 +29,16 @@ const StatPage = () => {
         ? "Loading..."
         : data.map((x, index) => (
             <div key={x._id || index}>
-              <p>{x._id}</p>
-              <h1>{x?.question}</h1>
+              <MathJaxContext>
+                <MathJax>{x.question}</MathJax>
+              </MathJaxContext>
+
               <p>{x?.topic}</p>
-              <br></br>
-              <Link to="/addstat">Add Questions</Link>
-              <Link to="/">Back to Homepage?</Link>
+              <br />
+              <div>
+                <Link to="/stat/addstat">Add Questions</Link>
+                <Link to="/">Back to Homepage?</Link>
+              </div>
             </div>
           ))}
     </div>

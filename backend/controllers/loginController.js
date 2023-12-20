@@ -1,8 +1,12 @@
 const userData = require("../models/users");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+const accessToken = process.env.ACCESS_TOKEN;
+const refreshToken = process.env.REFRESH_TOKEN;
 
 async function Login(req, res) {
-  const { username, password } = req.body;
+  const { username, password } = req?.body;
 
   if (!username || !password) {
     return res.status(400).json({ Alert: "Username or password not provided" });
@@ -17,8 +21,18 @@ async function Login(req, res) {
 
     const isPasswordValid = bcrypt.compareSync(password, user.password);
 
+    const accessToken = jwt.sign({ username: user }, accessToken, {
+      expiresIn: "5m",
+    });
+
+    const refreshToken = jwt.sign({ username: user }, refreshToken, {
+      expiresIn: "1d",
+    });
+
     if (isPasswordValid) {
-      return res.status(200).json({ Alert: `${username} logged in` });
+      return res
+        .status(200)
+        .json({ Alert: `${username} logged in , access Token ${accessToken}` });
     } else {
       return res.status(403).json({ Alert: `${username} unauthorized` });
     }

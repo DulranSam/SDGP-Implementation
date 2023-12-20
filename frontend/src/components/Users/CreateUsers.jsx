@@ -2,7 +2,7 @@ import { useState } from "react";
 import Axios from "axios";
 
 const CreateUsers = (props) => {
-  const { setUser, user, isLogged } = props;
+  // const { setUser, user, isLogged } = props;
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -12,30 +12,36 @@ const CreateUsers = (props) => {
   });
   const [status, setStatus] = useState("");
 
-  async function CreateUser(e) {
+  async function createUser(e) {
     e.preventDefault();
     const { username, password, mail, photo } = data;
+
     try {
       if (status !== "") {
         setStatus("");
       }
 
-      const form = new FormData();
-      form.append("username", username);
-      form.append("password", password);
-      form.append("mail", mail);
-      form.append("photo", photo);
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("password", password);
+      formData.append("mail", mail);
+      formData.append("photo", photo);
 
       setLoading(true);
-      const response = await Axios.post("http://localhost:8000/users", form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const response = await Axios.post(
+        "http://localhost:8000/users",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (response.status === 200) {
         setStatus("Account Created");
-
-        setUser({ ...user });
+        setUser({ ...user }); //overwrite to parent setUser
         isLogged(true);
+      } else if (response.status === 400) {
+        setStatus(response.data.Alert || "Bad Request");
       } else if (response.status === 409) {
         setStatus("Username is taken, please try again");
       }
@@ -50,7 +56,7 @@ const CreateUsers = (props) => {
     <div>
       <h1>Register</h1>
       <br></br>
-      <form onSubmit={CreateUser}>
+      <form onSubmit={createUser}>
         <input
           onChange={(e) => {
             setData({ ...data, username: e.target.value });

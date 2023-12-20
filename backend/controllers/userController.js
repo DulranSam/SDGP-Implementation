@@ -10,7 +10,8 @@ async function Users(req, res) {
 
 async function CreateUsers(req, res) {
   try {
-    const { username, password, mail, photo } = req.body;
+    const { username, password, mail } = req?.body;
+
     if (!username || !password || !mail) {
       return res
         .status(400)
@@ -18,26 +19,30 @@ async function CreateUsers(req, res) {
     }
 
     const userExists = await userData.findOne({ username: username });
+
     if (!userExists) {
       let savedPhoto;
       if (req.file) {
         savedPhoto = fs.writeFileSync(
-          join(__dirname, "public", "userpfps", photo)
+          join(__dirname, "public", "userpfps", req.file.filename)
         );
       }
 
-      const hashedPWD = bcrypt.hashSync(password, 10);
+      const randomNumber = Math.random();
+      const hashedPWD = bcrypt.hashSync(password, randomNumber);
+
       const newUser = new userData({
         username,
         password: hashedPWD,
         mail,
-        photo,
+        photo: req.file ? req.file.filename : null,
       });
+
       await newUser.save();
-      return res.status(200).json({ Alert: `${username} Created` });
+      return res.status(200).json({ Alert: `Account ${username} Created` });
     } else {
       return res.status(409).json({
-        Alert: `${username} already exists , please use another username`,
+        Alert: `${username} already exists, please use another username`,
       });
     }
   } catch (error) {

@@ -1,25 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const socialController = require("../controllers/SocialController");
+const { ObjectId } = require("mongodb");
+const forum = require("../models/forum");
 
 router
   .route("/")
   .get(socialController.GetUsers)
-  .post((req, res) => {
-    const { question } = req.body;
-    if (!question)
-      return res.status(400).json({ Alert: "No question provided" });
+  .post(async (req, res) => {
+    const { question, topic } = req?.body;
+
+    if (!question || !topic)
+      return res.status(400).json({ Alert: "No questions or topic provided" });
+
+    const newQuestion = new forum({
+      question,
+      topic,
+    });
+
+    await newQuestion.save();
+    return res.status(201).json({ Alert: "Question Added" });
   });
 
 router
   .route("/:id")
   .delete(async (req, res) => {
-    const { id } = req.params;
+    const { id } = req?.params;
     const convertedID = String(id);
     if (!id) return res.status(400).json({ Alert: "No ID found" });
 
     const deleteQuestion = await forumModel.findOneAndDelete({
-      _id: convertedID,
+      _id: new ObjectId(convertedID),
     });
     if (!deleteQuestion) {
       return res.status(400).json({ Alert: "Error while deleting question" });
@@ -28,7 +39,7 @@ router
     }
   })
   .put(async (req, res) => {
-    const { id } = req.params;
+    const { id } = req?.params;
     const convertedID = String(id);
     if (!id) return res.status(400).json({ Alert: "No ID found" });
 

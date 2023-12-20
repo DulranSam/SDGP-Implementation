@@ -21,8 +21,8 @@ const AddStat = () => {
       const { topic, question } = data;
 
       const response = await Axios.post("http://localhost:8000/admin/pure", {
-        topic: topic,
-        question: question,
+        topic,
+        question,
       });
 
       if (response.status === 200) {
@@ -39,7 +39,7 @@ const AddStat = () => {
 
   return (
     <div>
-      <h1>Add Statistics Questions</h1>
+      <h1>Add Pure Maths Questions</h1>
       <form onSubmit={AddQuestion}>
         <input
           ref={topicRef}

@@ -12,7 +12,7 @@ async function PureMathQuestions(req, res) {
 
 async function AddPureMaths(req, res) {
   try {
-    const { topic, question } = req.body;
+    const { topic, question } = req?.body;
     if (!topic || !question) {
       return res.status(400).json({ Alert: "No Topic or question provided" });
     }

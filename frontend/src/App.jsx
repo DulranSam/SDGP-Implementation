@@ -15,6 +15,7 @@ import Login from "./components/Users/Login";
 function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
   const [isLogged, setIsLogged] = useState(false);
+  // const userContext = createContext();
 
   return (
     <>
@@ -25,9 +26,9 @@ function App() {
             element={<HomePage username={user} isLogged={isLogged}></HomePage>}
           ></Route>
           <Route path="/stat" element={<StatPage></StatPage>}></Route>
-          <Route path="/addstat" element={<AddStat></AddStat>}></Route>
+          <Route path="/stat/addstat" element={<AddStat></AddStat>}></Route>
           <Route path="/puremath" element={<PureMath></PureMath>}></Route>
-          <Route path="/addpure" element={<AddPure></AddPure>}></Route>
+          <Route path="/puremath/addpure" element={<AddPure></AddPure>}></Route>
           <Route
             path="/adduser"
             element={
