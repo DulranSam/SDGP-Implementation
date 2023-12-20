@@ -7,10 +7,12 @@ const Forum = () => {
   const [response, setResponse] = useState("");
   const [status, setStatus] = useState("");
 
+  const EndPoint = "http://localhost:8000/social";
+
   async function ForumData() {
     try {
       setLoading(true);
-      const r = await Axios.get("http://localhost:8000/social").then((r) => {
+      const r = await Axios.get(EndPoint).then((r) => {
         setData(r.data);
       });
     } catch (err) {
@@ -27,7 +29,7 @@ const Forum = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/social", {
+      const r = await Axios.post(EndPoint, {
         data: { response },
       }).then((r) => {
         if (r.status === 200) {
@@ -68,10 +70,7 @@ const Forum = () => {
               {status}
             </div>
           ))}
-      <h1>
-        As of right now this , nothing will be displayed as there's nothing in
-        the collection
-      </h1>
+      <h1>As of right now this , nothing will be displayed!</h1>
     </div>
   );
 };

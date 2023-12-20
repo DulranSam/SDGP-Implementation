@@ -9,6 +9,8 @@ const CreateQuestion = () => {
   const [status, setStatus] = useState("");
   const [data, setData] = useState([]);
 
+  const EndPoint = "http://localhost:8000/social";
+
   async function AddQuestion(e) {
     e.preventDefault();
     try {
@@ -16,7 +18,7 @@ const CreateQuestion = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/social", {
+      const r = await Axios.post(EndPoint, {
         question,
       }).then((r) => {
         if (r.status === 200) {
@@ -36,7 +38,7 @@ const CreateQuestion = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post("");
+      const r = await Axios.post(EndPoint);
     } catch (err) {
       console.error(err);
     } finally {
@@ -50,7 +52,7 @@ const CreateQuestion = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.get("http://localhost:8000/social")
+      const r = await Axios.get(EndPoint)
         .then((r) => {
           setData(r.data);
         })
@@ -67,7 +69,7 @@ const CreateQuestion = () => {
 
   useEffect(() => {
     GetQuestions();
-  }, []);
+  });
 
   return (
     <div className="container-fluid">

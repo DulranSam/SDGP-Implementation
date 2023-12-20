@@ -19,41 +19,46 @@ const ViewUsers = () => {
     }
   }
 
-  async function DeleteUser(id) {
+  async function deleteUser(id) {
     try {
       setLoading(true);
       const response = await Axios.delete(`http://localhost:8000/users/${id}`);
       if (response.status === 200) {
         setStatus("Account Deleted");
+        fetchUsers(); // Fetch users again after deletion
       } else if (response.status === 400) {
         setStatus("Account Doesn't Exist?");
       } else {
-        setStatus("Error Occured");
+        setStatus("Error Occurred");
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error deleting user:", error);
     } finally {
       setLoading(false);
-      window.location.reload();
     }
   }
 
   async function updateUser(id) {
     try {
+      if (status !== "") {
+        setStatus("");
+      }
       setLoading(true);
-      const response = await Axios.put(`http://localhost:8000/users/${id}`);
+      const response = await Axios.put(`http://localhost:8000/users/${id}`, {
+        updatedUsername: newer,
+      });
       if (response.status === 200) {
-        setStatus("Username updated");
+        setStatus("Username updated!");
+        fetchUsers(); // Fetch users again after update
       } else if (response.status === 400) {
         setStatus("Account Doesn't Exist?");
       } else {
-        setStatus("Error Occured");
+        setStatus("Error Occurred");
       }
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error updating user:", error);
     } finally {
       setLoading(false);
-      window.location.reload();
     }
   }
 
@@ -74,10 +79,10 @@ const ViewUsers = () => {
               <h2>Mail : {user.mail}</h2>
               <button
                 onClick={() => {
-                  DeleteUser(user._id);
+                  deleteUser(user._id);
                 }}
               >
-                {user._id ? <p>Delete User</p> : <p>User not found</p>}
+                Delete User
               </button>
               <div>
                 <input
@@ -85,14 +90,13 @@ const ViewUsers = () => {
                     setNewUsername(e.target.value);
                   }}
                   placeholder="Enter Updated Username"
-                  value={newer}
-                ></input>
+                />
                 <button
                   onClick={() => {
-                    updateUser(user._id, newer);
+                    updateUser(user._id);
                   }}
                 >
-                  {user._id ? <p>update User</p> : <p>User not found</p>}
+                  Update User
                 </button>
               </div>
             </div>

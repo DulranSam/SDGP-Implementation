@@ -10,7 +10,7 @@ router
   .post(async (req, res) => {
     const { question, topic } = req?.body;
 
-    if (!question || !topic)
+    if (!question)
       return res.status(400).json({ Alert: "No questions or topic provided" });
 
     const newQuestion = new forum({
