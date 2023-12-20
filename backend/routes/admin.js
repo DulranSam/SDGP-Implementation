@@ -3,6 +3,10 @@ const router = express.Router();
 const statisticController = require("../controllers/StatisticController");
 const pureMaths = require("../controllers/PureMathController");
 
+router.route("/").get((req, res) => {
+  res.json({ Alert: req.method });
+});
+
 router
   .route("/stat")
   .get(statisticController.StatisticQuestions)

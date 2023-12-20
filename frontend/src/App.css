@@ -1,5 +1,129 @@
-* {
-  text-align: center;
-  margin: 2%;
-  justify-content: space-around;
+/* App.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap");
+
+body {
+  font-family: "Poppins", "Arial", sans-serif;
+  margin: 5;
+  padding: 0;
+  background-color: #f4f4f4;
 }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.navbar {
+  background-color: #444;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #58a6ff;
+}
+
+.page-content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  background-color: #58a6ff;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #3068b5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Add this to your App.css or create a new CSS file for HomePage */
+
+.container-fluid {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #007bff;
+}
+
+h2 {
+  font-size: 1.2em;
+  color: #495057;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1em;
+  }
+
+  button {
+    padding: 8px 12px;
+    margin: 8px;
+  }
+}
+
+/* Add more specific styling for individual components as needed */

@@ -30,7 +30,7 @@ const CreateUsers = (props) => {
       setLoading(true);
       const response = await Axios.post(
         "http://localhost:8000/users",
-        formData,
+        { body: JSON.stringify(formData) },
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
@@ -39,7 +39,6 @@ const CreateUsers = (props) => {
       if (response.status === 200) {
         setStatus("Account Created");
         setUser({ ...user }); //overwrite to parent setUser
-        isLogged(true);
       } else if (response.status === 400) {
         setStatus(response.data.Alert || "Bad Request");
       } else if (response.status === 409) {

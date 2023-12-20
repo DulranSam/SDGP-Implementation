@@ -30,7 +30,7 @@ const Forum = () => {
       }
       setLoading(true);
       const r = await Axios.post(EndPoint, {
-        data: { response },
+        body: JSON.stringify({ response: response }),
       }).then((r) => {
         if (r.status === 200) {
           setStatus("Question Added");

@@ -16,10 +16,10 @@ const AddStat = () => {
   async function AddQuestion(e) {
     e.preventDefault();
     try {
+      const { topic, question } = data;
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/admin/pure", {
-        topic: data.topic,
-        question: data.question,
+        body: JSON.stringify({ topic: topic, question: question }),
       }).then((r) => {
         if (r.status === 200) {
           setStatus("Question Added");

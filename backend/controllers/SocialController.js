@@ -5,4 +5,19 @@ async function GetUsers(req, res) {
   res.json(forumData);
 }
 
-module.exports = { GetUsers };
+async function CreateQuestions() {
+  const { question, topic } = req?.body;
+
+  if (!question)
+    return res.status(400).json({ Alert: "No questions or topic provided" });
+
+  const newQuestion = new forum({
+    question,
+    topic,
+  });
+
+  await newQuestion.save();
+  return res.status(201).json({ Alert: "Question Added" });
+}
+
+module.exports = { GetUsers, CreateQuestions };

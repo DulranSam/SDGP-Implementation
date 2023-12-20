@@ -25,22 +25,23 @@ const StatPage = () => {
 
   return (
     <div>
+      <Link to="/">Back to Homepage?</Link>
       {loading
         ? "Loading..."
         : data.map((x, index) => (
             <div key={x._id || index}>
+              <br></br>
               <MathJaxContext>
-                <MathJax>{x.question}</MathJax>
+                <MathJax>Question :{x.question}</MathJax>
               </MathJaxContext>
 
-              <p>{x?.topic}</p>
+              <p>Topic : {x?.topic}</p>
               <br />
-              <div>
-                <Link to="/stat/addstat">Add Questions</Link>
-                <Link to="/">Back to Homepage?</Link>
-              </div>
+
+              <br></br>
             </div>
           ))}
+      <Link to="/stat/addstat">Add Questions</Link>
     </div>
   );
 };

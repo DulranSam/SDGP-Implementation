@@ -19,7 +19,7 @@ const CreateQuestion = () => {
       }
       setLoading(true);
       const r = await Axios.post(EndPoint, {
-        question,
+        body: JSON.stringify({ question: question }),
       }).then((r) => {
         if (r.status === 200) {
           setStatus("Question Added");
@@ -38,7 +38,11 @@ const CreateQuestion = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post(EndPoint);
+      const r = await Axios.post(EndPoint, { answer }).then((r) => {
+        if (r.status === 200) {
+          setStatus("");
+        }
+      });
     } catch (err) {
       console.error(err);
     } finally {
