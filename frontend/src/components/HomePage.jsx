@@ -13,17 +13,15 @@ const HomePage = (props) => {
       setTime("Morning");
     } else if (hour < 15) {
       setTime("Afternoon");
-    } else if (hour < 17) {
-      setTime("Evening");
     } else {
-      setTime("Night"); //is this inclusive lol ?
+      setTime("Evening");
     }
   }, []);
 
   return (
     <div>
       <div className="container-fluid">
-        <h1>Good {time}! , Welcome to NerdJax</h1>
+        <h1>Good {time}! Welcome to NerdJax</h1>
         <h2 style={{ margin: "5%" }}>
           Our platform hopes to help you improve your maths skills, with the
           help of personalized learning ✨. So join us on this adventure to ace

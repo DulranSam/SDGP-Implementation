@@ -8,6 +8,7 @@ const adminPage = require("./routes/admin");
 const mongoose = require("mongoose");
 const users = require("./routes/users");
 const social = require("./routes/social");
+const gpt = require("./routes/gpt");
 const { join } = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
@@ -16,6 +17,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(express.json());
 
+app.use("/gpt", gpt);
 app.use("/admin", adminPage);
 app.use("/users", users);
 app.use("/social", social);
