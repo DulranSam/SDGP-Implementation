@@ -31,9 +31,10 @@ const PureMath = () => {
         ) : data && data.length ? (
           data.map((x, index) => (
             <div key={x._id || index}>
-              <div className="question"></div>
-              <h1>{x.question}</h1>
-              <p>{x.topic}</p>
+              <MathJaxContext>
+                <MathJax>Question :{x.question}</MathJax>
+              </MathJaxContext>
+              <p>Topic : {x.topic}</p>
               <br></br>
             </div>
           ))
@@ -41,12 +42,9 @@ const PureMath = () => {
           <p>No results found</p>
         )}
         <Link to="/puremath/addpure">Add Pure Maths Questions</Link>
+        <br></br>
         <Link to="/">Back to Homepage?</Link>
       </p>
-      <MathJaxContext>
-        <MathJax>{"$$(2 x-3)^2-\\frac{4}{(2 x-3)^2}-3=0 .$$"}</MathJax>
-        {/**Testing Math Jax */}
-      </MathJaxContext>
     </div>
   );
 };

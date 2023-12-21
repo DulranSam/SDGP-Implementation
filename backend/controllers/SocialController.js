@@ -5,13 +5,13 @@ async function GetUsers(req, res) {
   res.json(forumData);
 }
 
-async function CreateQuestions() {
+async function CreateQuestions(req, res) {
   const { question, topic } = req?.body;
 
   if (!question)
     return res.status(400).json({ Alert: "No questions or topic provided" });
 
-  const newQuestion = new forum({
+  const newQuestion = new forumModel({
     question,
     topic,
   });

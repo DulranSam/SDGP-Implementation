@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Axios from "axios";
@@ -26,16 +26,16 @@ const StatPage = () => {
   return (
     <div>
       <Link to="/">Back to Homepage?</Link>
+      <br></br>
       {loading
         ? "Loading..."
         : data.map((x, index) => (
             <div key={x._id || index}>
               <br></br>
               <MathJaxContext>
-                <MathJax>Question :{x.question}</MathJax>
+                <MathJax>{x.question}</MathJax>
               </MathJaxContext>
-
-              <p>Topic : {x?.topic}</p>
+              <p>Topic : {x.topic}</p>
               <br />
 
               <br></br>

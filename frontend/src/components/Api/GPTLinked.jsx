@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
 
 const GPTLinked = () => {
@@ -11,7 +11,7 @@ const GPTLinked = () => {
     try {
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/gpt", {
-        body: JSON.stringify({ search: search }),
+        body: JSON.stringify({ search }),
       }).then((r) => {
         setData(r.data);
       });

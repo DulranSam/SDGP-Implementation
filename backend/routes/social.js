@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const socialController = require("../controllers/SocialController");
 const socialIDController = require("../controllers/userIDControl/socialIDControl");
-const forum = require("../models/forum");
 
 router
   .route("/")

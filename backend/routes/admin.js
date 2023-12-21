@@ -4,7 +4,10 @@ const statisticController = require("../controllers/StatisticController");
 const pureMaths = require("../controllers/PureMathController");
 
 router.route("/").get((req, res) => {
-  res.json({ Alert: req.method });
+  res.json({
+    Alert:
+      "Change path (/stat) to get stat data or (/pure) to get pure math data",
+  });
 });
 
 router

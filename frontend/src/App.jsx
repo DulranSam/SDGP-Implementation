@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StatPage from "./components/StatPage";
-import PureMath from "./components/PureMath";
-import HomePage from "./components/HomePage";
-import AddStat from "./components/AddStat";
-import AddPure from "./components/AddPure";
+import StatPage from "./components/Math/StatPage";
+import PureMath from "./components/Math/PureMath";
+import HomePage from "./components/Main/HomePage";
+import AddStat from "./components/Math/AddStat";
+import AddPure from "./components/Math/AddPure";
 import ViewUsers from "./components/Users/ViewUsers";
 import "./App.css";
 import CreateUsers from "./components/Users/CreateUsers";
@@ -12,6 +12,7 @@ import { useState } from "react";
 import CreateQuestion from "./components/Forum/CreateQuestion";
 import Login from "./components/Users/Login";
 import GPTLinked from "./components/Api/GPTLinked";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
@@ -50,6 +51,7 @@ function App() {
           ></Route>
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/gpt" element={<GPTLinked></GPTLinked>}></Route>
+          <Route path="/dash" element={<Dashboard></Dashboard>}></Route>
         </Routes>
       </BrowserRouter>
     </>

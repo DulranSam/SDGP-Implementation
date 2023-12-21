@@ -2,7 +2,7 @@ const pureMaths = require("../models/pureMaths");
 
 async function PureMathQuestions(req, res) {
   try {
-    const questions = await pureMaths.find();
+    const questions = await pureMaths.find().exec();
     res.json(questions);
   } catch (error) {
     console.error(error);
@@ -12,16 +12,19 @@ async function PureMathQuestions(req, res) {
 
 async function AddPureMaths(req, res) {
   try {
-    const { topic, question } = req?.body;
-    if (!topic || !question) {
-      return res.status(400).json({ Alert: "No Topic or question provided" });
+    const { topic, question, answer } = req?.body;
+    if (!topic || !question || !answer) {
+      return res
+        .status(400)
+        .json({ Alert: "No Topic, question or answer provided" });
     }
 
-    const topicExists = await pureMaths.findOne({ topic: topic });
-    if (!topicExists) {
+    const questionExists = await pureMaths.findOne({ question: question });
+    if (!questionExists) {
       const statisticsData = new pureMaths({
         topic,
         question,
+        answer,
       });
       await statisticsData.save();
       return res.status(200).json({ Alert: "Added Question" });

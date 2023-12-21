@@ -7,19 +7,21 @@ const AddStat = () => {
   const [data, setData] = useState({
     topic: "",
     question: "",
+    answer: "",
   });
   const [status, setStatus] = useState("");
 
   const topicRef = useRef();
   const questionRef = useRef();
+  const answerRef = useRef();
 
   async function AddQuestion(e) {
     e.preventDefault();
     try {
-      const { topic, question } = data;
+      const { topic, question, answer } = data;
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/admin/pure", {
-        body: JSON.stringify({ topic: topic, question: question }),
+        body: JSON.stringify({ topic, question, answer }),
       }).then((r) => {
         if (r.status === 200) {
           setStatus("Question Added");
@@ -50,6 +52,13 @@ const AddStat = () => {
             setData({ ...data, question: e.target.value });
           }}
           placeholder="Enter Question..."
+        ></input>
+        <input
+          ref={answerRef}
+          onChange={(e) => {
+            setData({ ...data, answer: e.target.value });
+          }}
+          placeholder="Enter Answer..."
         ></input>
         <button type="submit" disabled={loading}>
           <p>{status ? status : ""}</p>

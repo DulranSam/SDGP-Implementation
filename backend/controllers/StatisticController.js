@@ -12,13 +12,17 @@ async function StatisticQuestions(req, res) {
 
 async function CreateQuestions(req, res) {
   try {
-    const { topic, question } = req?.body;
-    if (!topic || !question) {
-      return res.status(400).json({ Alert: "No Topic or question provided" });
+    const { topic, question, answer } = req?.body;
+    if (!topic || !question || !answer) {
+      return res
+        .status(400)
+        .json({ Alert: "No Topic, question or answer provided" });
     }
 
-    const topicExists = await statisticsModel.findOne({ topic: topic });
-    if (!topicExists) {
+    const questionExists = await statisticsModel.findOne({
+      question: question,
+    });
+    if (!questionExists) {
       const statisticsData = new statisticsModel({
         topic,
         question,

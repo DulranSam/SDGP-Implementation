@@ -33,4 +33,19 @@ async function AskGPT(req, res) {
   }
 }
 
-module.exports = { AskGPT };
+async function Secondary(req, res) {
+  const { userInput } = req?.body;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "system", content: userInput }],
+      model: "gpt-3.5-turbo", //let's stick to this model for now
+    });
+
+    console.log(completion.choices[0]);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+module.exports = { AskGPT, Secondary };

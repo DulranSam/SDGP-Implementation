@@ -15,7 +15,7 @@ const Login = () => {
       const { username, password } = data;
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/users/login", {
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({ username, password }),
       }).then((r) => {
         if (r.status === 200) {
           setStatus("User Logged In");

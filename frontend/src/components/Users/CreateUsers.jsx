@@ -38,7 +38,7 @@ const CreateUsers = (props) => {
 
       if (response.status === 200) {
         setStatus("Account Created");
-        setUser({ ...user }); //overwrite to parent setUser
+        // setUser({ ...user }); //overwrite to parent setUser
       } else if (response.status === 400) {
         setStatus(response.data.Alert || "Bad Request");
       } else if (response.status === 409) {
