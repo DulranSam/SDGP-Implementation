@@ -20,7 +20,7 @@ const AddStat = () => {
     try {
       const { topic, question, answer } = data;
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/admin/pure", {
+      const r = await Axios.post("http://localhost:8000/admins/pure", {
         body: JSON.stringify({ topic, question, answer }),
       }).then((r) => {
         if (r.status === 200) {

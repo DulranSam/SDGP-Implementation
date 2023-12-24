@@ -22,7 +22,7 @@ const ViewUsers = () => {
   async function deleteUser(id) {
     try {
       setLoading(true);
-      const response = await Axios.delete(`http://localhost:8000/users/${id}`);
+      const response = await Axios.delete(`http://localhost:8000/users/${id}`); //params
       if (response.status === 200) {
         setStatus("Account Deleted");
         fetchUsers(); // Fetch users again after deletion
@@ -44,7 +44,8 @@ const ViewUsers = () => {
         setStatus("");
       }
       setLoading(true);
-      const response = await Axios.put(`http://localhost:8000/users/${id}`, {
+      const response = await Axios.put(`http://localhost:8000/users/${id} `, {
+        //params
         updatedUsername: newer,
       });
       if (response.status === 200) {

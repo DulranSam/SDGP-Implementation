@@ -22,7 +22,7 @@ const AddStat = () => {
 
       const { topic, question, answer } = data;
 
-      const response = await Axios.post("http://localhost:8000/admin/pure", {
+      const response = await Axios.post("http://localhost:8000/admins/pure", {
         body: JSON.stringify({ topic, question, answer }),
       });
 

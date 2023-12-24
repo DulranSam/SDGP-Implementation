@@ -13,6 +13,7 @@ import CreateQuestion from "./components/Forum/CreateQuestion";
 import Login from "./components/Users/Login";
 import GPTLinked from "./components/Api/GPTLinked";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Gemini from "./components/Api/Gemini/GeminiLinked";
 
 function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
@@ -23,9 +24,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/gemini" element={<Gemini></Gemini>}></Route>
           <Route
             path="/"
-            element={<HomePage username={user} isLogged={isLogged}></HomePage>}
+            element={<HomePage username={user} isLogged={true}></HomePage>}
           ></Route>
           <Route path="/stat" element={<StatPage></StatPage>}></Route>
           <Route path="/stat/addstat" element={<AddStat></AddStat>}></Route>

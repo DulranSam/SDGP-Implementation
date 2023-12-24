@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 const HomePage = (props) => {
-  // const { user, isLogged } = props;
+  const { user, isLogged } = props;
   const [time, setTime] = useState("day");
+  const [userx, setUser] = useState([]);
 
   useEffect(() => {
     const date = new Date();
@@ -18,7 +20,52 @@ const HomePage = (props) => {
     }
   }, []);
 
-  return (
+  async function GetProgress() {
+    try {
+      const r = await Axios.get("http://localhost:8000/users").then((r) => {
+        setUser(r.data);
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    GetProgress();
+  }, []);
+
+  return isLogged ? (
+    <div>
+      <h1>
+        Good {time} , Welcome Back {user}!
+      </h1>
+      <h1>Resume where you left off</h1>
+      <div className="math">
+        <div>
+          <p>
+            Progress
+            {userx.map((x) => (
+              <div key={x.id}>
+                <h1>{x.username}</h1>
+                <h1>PureMath</h1>
+                <Link to="/puremath">
+                  <button>PureMath</button>
+                </Link>
+              </div>
+            ))}
+          </p>
+        </div>
+
+        <div>
+          <h1>Forum</h1>
+          <Link to="/forum">
+            <button>forum</button>
+          </Link>
+        </div>
+      </div>
+      <h2></h2>
+    </div>
+  ) : (
     <div>
       <div className="container-fluid">
         <h1>Good {time}! Welcome to NerdJax</h1>

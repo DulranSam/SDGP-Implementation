@@ -10,7 +10,7 @@ const StatPage = () => {
   async function SearchQuestion() {
     try {
       setLoading(true);
-      const response = await Axios.get("http://localhost:8000/admin/stat");
+      const response = await Axios.get("http://localhost:8000/admins/stat");
       setData(response.data);
     } catch (error) {
       console.error(error);

@@ -7,7 +7,7 @@ const Forum = () => {
   const [response, setResponse] = useState("");
   const [status, setStatus] = useState("");
 
-  const EndPoint = "http://localhost:8000/social";
+  const EndPoint = "http://localhost:8000/socials";
 
   async function ForumData() {
     try {

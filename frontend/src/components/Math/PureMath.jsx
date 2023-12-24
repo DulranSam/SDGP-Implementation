@@ -10,7 +10,7 @@ const PureMath = () => {
   async function SearchQuestion() {
     try {
       setLoading(true);
-      const r = await Axios.get("http://localhost:8000/admin/pure");
+      const r = await Axios.get("http://localhost:8000/admins/pure");
       setData(r.data);
     } catch (err) {
       console.error(err);

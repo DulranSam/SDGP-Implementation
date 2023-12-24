@@ -14,15 +14,19 @@ const { join } = require("path");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
+const dashboard = require("./routes/dashboard");
+const gemini = require("./routes/gemini");
 
 app.use(cors({ origin: true })); //allow access from anywhere
 app.use(helmet()); //to protect the api
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 app.use(bodyParser.json({ strict: false }));
-app.use("/gpt", gpt);
-app.use("/admin", adminPage);
+app.use("/gpts", gpt);
+app.use("/admins", adminPage);
 app.use("/users", users);
-app.use("/social", social);
+app.use("/socials", social);
+app.use("/dashboards", dashboard);
+app.use("/gemini", gemini);
 
 if (!fs.existsSync(join(__dirname, "public"))) {
   fs.mkdirSync(join(__dirname, "public"));

@@ -1,0 +1,1 @@
+For the timing feature let's provide the time as seconds when uploading the question then for every question it will run a setTimeout() and clear the Timeout once limit reaches , then an setInterval will begin (student goes overtime) and we can clean the setInterval

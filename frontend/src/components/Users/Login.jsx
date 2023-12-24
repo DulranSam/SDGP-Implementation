@@ -19,7 +19,7 @@ const Login = () => {
       }).then((r) => {
         if (r.status === 200) {
           setStatus("User Logged In");
-          window.location.href = "http://localhost:5173/";
+          window.location.href = "http://localhost:5173/"; //go to homepage
         } else if (r.status === 403) {
           setStatus("Invalid username or password");
         }

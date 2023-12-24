@@ -9,7 +9,7 @@ const CreateQuestion = () => {
   const [status, setStatus] = useState("");
   const [data, setData] = useState([]);
 
-  const EndPoint = "http://localhost:8000/social";
+  const EndPoint = "http://localhost:8000/socials";
 
   async function AddQuestion(e) {
     e.preventDefault();
