@@ -21,6 +21,9 @@ function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
   const [isLogged, setIsLogged] = useState(false);
 
+
+  //We need to reorganize this to pass props in the context provider , this is very messy!
+
   return (
     <>
       <BrowserRouter>
