@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import Axios from "axios";
 
 const AddStat = () => {
@@ -62,7 +63,7 @@ const AddStat = () => {
         ></input>
         <button type="submit" disabled={loading}>
           <p>{status ? status : ""}</p>
-          {loading ? "Loading..." : "Add Question"}
+          {loading ? <TailSpin></TailSpin> : "Add Question"}
         </button>
         <Link to="/">Back to Homepage?</Link>
       </form>

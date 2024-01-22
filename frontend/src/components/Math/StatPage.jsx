@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import Axios from "axios";
 
@@ -27,20 +28,22 @@ const StatPage = () => {
     <div>
       <Link to="/">Back to Homepage?</Link>
       <br></br>
-      {loading
-        ? "Loading..."
-        : data.map((x, index) => (
-            <div key={x._id || index}>
-              <br></br>
-              <MathJaxContext>
-                <MathJax>{x.question}</MathJax>
-              </MathJaxContext>
-              <p>Topic : {x.topic}</p>
-              <br />
+      {loading ? (
+        <TailSpin></TailSpin>
+      ) : (
+        data.map((x, index) => (
+          <div key={x._id || index}>
+            <br></br>
+            <MathJaxContext>
+              <MathJax>{x.question}</MathJax>
+            </MathJaxContext>
+            <p>Topic : {x.topic}</p>
+            <br />
 
-              <br></br>
-            </div>
-          ))}
+            <br></br>
+          </div>
+        ))
+      )}
       <Link to="/stat/addstat">Add Questions</Link>
     </div>
   );

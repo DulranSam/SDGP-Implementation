@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import Axios from "axios";
 
 function Gemini() {
@@ -34,7 +35,7 @@ function Gemini() {
           placeholder="Say something"
         />
         <button type="submit" disabled={loading}>
-          {loading ? <h1>Loading</h1> : <p>Search</p>}
+          {loading ? <TailSpin></TailSpin> : <p>Search</p>}
         </button>
         {data && data.length ? JSON.stringify(data) : <h1>No results found</h1>}
       </form>

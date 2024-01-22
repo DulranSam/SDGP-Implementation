@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import Axios from "axios";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 
@@ -27,7 +28,7 @@ const PureMath = () => {
     <div>
       <p>
         {loading ? (
-          "Loading..."
+          <TailSpin></TailSpin>
         ) : data && data.length ? (
           data.map((x, index) => (
             <div key={x._id || index}>
