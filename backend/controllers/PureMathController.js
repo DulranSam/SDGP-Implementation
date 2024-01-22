@@ -21,12 +21,11 @@ async function AddPureMaths(req, res) {
 
     const questionExists = await pureMaths.findOne({ question: question });
     if (!questionExists) {
-      const statisticsData = new pureMaths({
+      await pureMaths.create({
         topic,
         question,
         answer,
       });
-      await statisticsData.save();
       return res.status(200).json({ Alert: "Added Question" });
     } else {
       return res.status(400).json({ Alert: "Question already exists" });

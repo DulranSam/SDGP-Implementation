@@ -30,11 +30,15 @@ async function Login(req, res) {
     });
 
     if (isPasswordValid) {
-      return res
-        .status(200)
-        .json({
-          Alert: `${username} logged in , access Token ${accessToken} & Refresh Token ${refreshToken}`,
-        });
+      await res.cookie(
+        "user",
+        { username, password },
+        { maxAge: 60000, httpOnly: true }
+      );
+
+      return res.status(200).json({
+        Alert: `${username} logged in , access Token ${accessToken} & Refresh Token ${refreshToken}`,
+      });
     } else {
       return res.status(403).json({ Alert: `${username} unauthorized` });
     }
@@ -44,4 +48,14 @@ async function Login(req, res) {
   }
 }
 
-module.exports = { Login };
+async function LogOut(req, res) {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return res.status(200).json({ Alert: "User Logged out!" });
+    }
+  });
+}
+
+module.exports = { Login, LogOut };

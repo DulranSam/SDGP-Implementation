@@ -1,12 +1,12 @@
-const { ObjectId } = require("mongodb");
+const userData = require("../../models/users");
 
 async function DeleteUsers(req, res) {
   const { id } = req?.params;
-  const convertedID = String(id);
+
   if (!id) return res.status(400).json({ Alert: "No ID found" });
 
-  const deleteQuestion = await forumModel.findOneAndDelete({
-    _id: new ObjectId(convertedID),
+  const deleteQuestion = await userData.findOneAndDelete({
+    _id: String(id),
   });
   if (!deleteQuestion) {
     return res.status(400).json({ Alert: "Error while deleting question" });
@@ -17,10 +17,10 @@ async function DeleteUsers(req, res) {
 
 async function UpdateUsers(req, res) {
   const { id } = req?.params;
-  const convertedID = String(id);
+
   if (!id) return res.status(400).json({ Alert: "No ID found" });
 
-  const updateQuestion = await forumModel.findOneAndUpdate({
+  const updateQuestion = await userData.findOneAndUpdate({
     _id: convertedID,
   });
   if (!updateQuestion) {

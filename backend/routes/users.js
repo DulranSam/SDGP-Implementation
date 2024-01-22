@@ -7,6 +7,7 @@ const userIDController = require("../controllers/userIDControl/userIDControl");
 router.route("/").get(userController.Users).post(userController.CreateUsers);
 
 router.route("/login").post(loginController.Login);
+router.route("/logout").get(loginController.LogOut);
 
 router
   .route("/:id")

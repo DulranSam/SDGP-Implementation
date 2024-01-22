@@ -6,17 +6,17 @@ async function GetUsers(req, res) {
 }
 
 async function CreateQuestions(req, res) {
-  const { question, topic } = req?.body;
+  const { question, answer, topic } = req?.body;
 
   if (!question)
     return res.status(400).json({ Alert: "No questions or topic provided" });
 
-  const newQuestion = new forumModel({
+  await forumModel.create({
     question,
+    answer,
     topic,
   });
 
-  await newQuestion.save();
   return res.status(201).json({ Alert: "Question Added" });
 }
 

@@ -1,11 +1,15 @@
 const userData = require("../models/users");
-const bcrypt = require("bcrypt");
+
 const fs = require("fs");
 const { join } = require("path");
 
 async function Users(req, res) {
   const users = await userData.find();
-  res.json(users);
+  if (users.length) {
+    res.status(200).json(users);
+  } else {
+    res.status(400).json({ Alert: "No users found!" });
+  }
 }
 
 async function CreateUsers(req, res) {
@@ -18,31 +22,32 @@ async function CreateUsers(req, res) {
         .json({ Alert: "Username/Password or Mail missing" });
     }
 
-    const userExists = await userData.findOne({ username: username });
+    const userExists = await userData.findOne({
+      $or: { username: username, mail: mail },
+    });
 
     if (!userExists) {
       let savedPhoto;
       if (req.file) {
         savedPhoto = fs.writeFileSync(
+          //consider cloudinary!
           join(__dirname, "public", "userpfps", req.file.filename)
         );
       }
 
-      const randomNumber = Math.random();
-      const hashedPWD = bcrypt.hashSync(password, randomNumber);
+      const hashedPWD = new HashPass(password);
 
-      const newUser = new userData({
+      await userData.create({
         username,
         password: hashedPWD,
         mail,
         photo: req.file ? req.file.filename : null,
       });
 
-      await newUser.save();
       return res.status(200).json({ Alert: `Account ${username} Created` });
     } else {
       return res.status(409).json({
-        Alert: `${username} already exists, please use another username`,
+        Alert: `${username} or ${mail} already exists!`,
       });
     }
   } catch (error) {

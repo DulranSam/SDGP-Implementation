@@ -2,7 +2,7 @@ const Dashboard = require("../Dash");
 const userModel = require("../../../models/users");
 
 async function GetProgress(req, res) {
-  const userProgress = new Dashboard("velo", "velo123", "velo@gmail.com"); //just testing , this is invalid
+  const userProgress = new Dashboard("velo", "velo123", "velo@gmail.com");
 
   const findUser = await userModel.find({ userProgress });
   if (!findUser) {
