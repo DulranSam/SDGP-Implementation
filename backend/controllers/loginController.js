@@ -21,23 +21,23 @@ async function Login(req, res) {
 
     const isPasswordValid = bcrypt.compareSync(password, user.password);
 
-    const accessToken = jwt.sign(
-      { user: { username, password } },
-      accessTokenX,
-      {
-        expiresIn: "5m",
-      }
-    );
-
-    const refreshToken = jwt.sign(
-      { user: { username, password } },
-      refreshTokenX,
-      {
-        expiresIn: "1d",
-      }
-    );
-
     if (isPasswordValid) {
+      const accessToken = jwt.sign(
+        { user: { username, password } },
+        accessTokenX,
+        {
+          expiresIn: "5m",
+        }
+      );
+
+      const refreshToken = jwt.sign(
+        { user: { username, password } },
+        refreshTokenX,
+        {
+          expiresIn: "1d",
+        }
+      );
+      req.session.user = { username, password };
       await res.cookie(
         "user",
         { username, password },
