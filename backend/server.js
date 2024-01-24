@@ -25,6 +25,7 @@ app.use(
     secret: "someencryptedkeylol123",
     resave: false,
     saveUninitialized: false,
+    httpSecure: true,
     cookie: { maxAge: 60000 }, // session timeout of 60 seconds
   })
 );

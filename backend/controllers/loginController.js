@@ -37,7 +37,7 @@ async function Login(req, res) {
           expiresIn: "1d",
         }
       );
-      req.session.user = { username, password };
+      req.session.user = { username, password, maxAge: 60000 };
       await res.cookie(
         "user",
         { username, password },
@@ -45,10 +45,12 @@ async function Login(req, res) {
       );
 
       return res.status(200).json({
-        Alert: `${username} logged in , access Token ${accessToken} & Refresh Token ${refreshToken}`,
+        Alert: `${username} logged in `,
+        AccessToken: accessToken,
+        RefreshToken: refreshToken,
       });
     } else {
-      return res.status(403).json({ Alert: `${username} unauthorized` });
+      return res.status(401).json({ Alert: `${username} unauthorized` });
     }
   } catch (error) {
     console.error(error);
@@ -60,6 +62,7 @@ async function LogOut(req, res) {
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
+      return res.status(400).json({ Alert: "Error while logging out!" });
     } else {
       return res.status(200).json({ Alert: "User Logged out!" });
     }

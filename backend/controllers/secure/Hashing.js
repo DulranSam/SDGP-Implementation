@@ -3,8 +3,11 @@ const randomNumber = Math.random();
 
 class HashPass {
   constructor(password) {
-    this.password = password;
-    return bcrypt.hashSync(password, randomNumber);
+    this.hashedPassword = bcrypt.hashSync(password, randomNumber);
+  }
+
+  getHashedPassword() {
+    return this.hashedPassword;
   }
 }
 

@@ -1,8 +1,5 @@
 const userData = require("../models/users");
-
-const fs = require("fs");
-const { join } = require("path");
-
+const HashPass = require("./secure/Hashing");
 async function Users(req, res) {
   const users = await userData.find();
   if (users.length) {
@@ -23,26 +20,22 @@ async function CreateUsers(req, res) {
     }
 
     const userExists = await userData.findOne({
-      $or: { username: username, mail: mail },
+      $or: [{ username: username }, { mail: mail }],
     });
 
     if (!userExists) {
       let savedPhoto;
-      if (req.file) {
-        savedPhoto = fs.writeFileSync(
-          //consider cloudinary!
-          join(__dirname, "public", "userpfps", req.file.filename)
-        );
-      }
 
-      const hashedPWD = new HashPass(password);
+      const hashedPWD = new HashPass(password).getHashedPassword();
 
       await userData.create({
         username,
         password: hashedPWD,
         mail,
-        photo: req.file ? req.file.filename : null,
+        // photo: req.file ? req.file.filename : null,
       });
+
+      req.session.user = { username, password };
 
       return res.status(200).json({ Alert: `Account ${username} Created` });
     } else {

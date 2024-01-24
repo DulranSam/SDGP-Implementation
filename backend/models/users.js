@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema(
     },
     mail: {
       type: String,
+      unique: true,
       required: true,
       max: 20,
       trim: true,
@@ -24,14 +25,14 @@ const userSchema = mongoose.Schema(
       default: "",
       trim: true,
     },
-    rank: {
-      type: Number,
-      default: 0,
-    },
-    done: {
-      type: Array,
-      default: [],
-    },
+    // rank: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // done: {
+    //   type: Array,
+    //   default: [],
+    // },
   },
   { timestamps: true }
 );
