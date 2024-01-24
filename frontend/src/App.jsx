@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StatPage from "./components/Math/StatPage";
 import PureMath from "./components/Math/PureMath";
@@ -21,8 +22,8 @@ function App() {
   const [user, setUser] = useState(); //setter should contain details of user to pass around as props
   const [isLogged, setIsLogged] = useState(false);
 
-
   //We need to reorganize this to pass props in the context provider , this is very messy!
+  //we could possibly use redux for global state management , will make life easier!
 
   return (
     <>

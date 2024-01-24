@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Axios from "axios";
 
@@ -25,12 +26,12 @@ const CreateUsers = (props) => {
       formData.append("username", username);
       formData.append("password", password);
       formData.append("mail", mail);
-      formData.append("photo", photo);
+      formData.append("photo", photo); //form cuz we're sending an image!
 
       setLoading(true);
       const response = await Axios.post(
         "http://localhost:8000/users",
-        { body: JSON.stringify(formData) },
+        formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }

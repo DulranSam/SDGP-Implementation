@@ -10,11 +10,8 @@ const GPTLinked = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/gpts", {
-        body: JSON.stringify({ search }),
-      }).then((r) => {
-        setData(r.data);
-      });
+      const r = await Axios.post("http://localhost:8000/gpts", search);
+      setData(r.data);
     } catch (err) {
       console.error(err);
     } finally {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
@@ -22,9 +23,8 @@ const HomePage = (props) => {
 
   async function GetProgress() {
     try {
-      const r = await Axios.get("http://localhost:8000/users").then((r) => {
-        setUser(r.data);
-      });
+      const r = await Axios.get("http://localhost:8000/users");
+      setUser(r.data); //let's use the context api rather than passing it down like props!
     } catch (err) {
       console.error(err);
     }
@@ -40,18 +40,16 @@ const HomePage = (props) => {
         Good {time} , Welcome Back {user}!
       </h1>
       <h1>Resume where you left off</h1>
+      <h1>PureMath</h1>
+      <Link to="/puremath">
+        <button>PureMath</button>
+      </Link>
       <div className="math">
         <div>
           <p>
             Progress
             {userx.map((x) => (
-              <div key={x.id}>
-                <h1>{x.username}</h1>
-                <h1>PureMath</h1>
-                <Link to="/puremath">
-                  <button>PureMath</button>
-                </Link>
-              </div>
+              <div key={x.id}></div>
             ))}
           </p>
         </div>

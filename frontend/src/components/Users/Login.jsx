@@ -12,18 +12,14 @@ const Login = () => {
   async function Login(e) {
     e.preventDefault();
     try {
-      const { username, password } = data;
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/users/login", {
-        body: JSON.stringify({ username, password }),
-      }).then((r) => {
-        if (r.status === 200) {
-          setStatus("User Logged In");
-          window.location.href = "http://localhost:5173/"; //go to homepage
-        } else if (r.status === 403) {
-          setStatus("Invalid username or password");
-        }
-      });
+      const r = await Axios.post("http://localhost:8000/users/login", data);
+      if (r.status === 200) {
+        setStatus("User Logged In");
+        navigator("/"); //go to homepage
+      } else if (r.status === 403) {
+        setStatus("Invalid username or password");
+      }
     } catch (err) {
       console.error(err);
     } finally {

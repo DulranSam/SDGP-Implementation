@@ -19,15 +19,11 @@ const AddStat = () => {
   async function AddQuestion(e) {
     e.preventDefault();
     try {
-      const { topic, question, answer } = data;
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/admins/pure", {
-        body: JSON.stringify({ topic, question, answer }),
-      }).then((r) => {
-        if (r.status === 200) {
-          setStatus("Question Added");
-        }
-      });
+      const r = await Axios.post("http://localhost:8000/admins/pure", data);
+      if (r.status === 200) {
+        setStatus("Question Added!");
+      }
     } catch (err) {
       console.error(err);
     } finally {

@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  //let's pass these down from the App component , makes life easier!
   const [user, setUser] = useState("tester"); //let's modify to props later
   const [rank, setRank] = useState(100);
   const [progress, setProg] = useState({

@@ -21,11 +21,10 @@ const AddStat = () => {
     try {
       setLoading(true);
 
-      const { topic, question, answer } = data;
-
-      const response = await Axios.post("http://localhost:8000/admins/pure", {
-        body: JSON.stringify({ topic, question, answer }),
-      });
+      const response = await Axios.post(
+        "http://localhost:8000/admins/pure",
+        data
+      );
 
       if (response.status === 200) {
         setStatus("Question Added");

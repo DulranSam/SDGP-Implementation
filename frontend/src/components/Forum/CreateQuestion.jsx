@@ -18,14 +18,17 @@ const CreateQuestion = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.post(EndPoint, {
-        body: JSON.stringify({ question: question }),
-      }).then((r) => {
-        if (r.status === 200) {
-          setStatus("Question Added");
-        }
-      });
-      window.location.reload();
+      const r = await Axios.post(EndPoint, question);
+
+      if (r.status === 200) {
+        setStatus("Question Added");
+      } else if (r.status === 409) {
+        setStatus("Question already exists!");
+      } else {
+        setStatus("Error while adding question!");
+      }
+
+      navigator("/");
     } catch (err) {
       setStatus("Error Occured, please try again");
       console.error(err);
@@ -38,11 +41,14 @@ const CreateQuestion = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post(EndPoint, { answer }).then((r) => {
-        if (r.status === 200) {
-          setStatus("");
-        }
-      });
+      const r = await Axios.post(EndPoint, { answer });
+      if (r.status === 200) {
+        setStatus("Answer Posted!");
+      }
+
+      setTimeout(() => {
+        navigator("/forum");
+      }, 2000);
     } catch (err) {
       console.error(err);
     } finally {
@@ -56,15 +62,10 @@ const CreateQuestion = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.get(EndPoint)
-        .then((r) => {
-          setData(r.data);
-        })
-        .catch((e) => {
-          console.log(e.response.data);
-        });
+      const r = await Axios.get(EndPoint);
+      setData(r.data);
     } catch (err) {
-      setStatus("Error Occured, please try again");
+      setStatus("Error Occured while fetching data!");
       console.error(err);
     } finally {
       setLoading(false);
