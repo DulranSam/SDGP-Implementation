@@ -58,15 +58,31 @@ async function Login(req, res) {
   }
 }
 
+const status = (req, res) => {
+  const { user } = req?.session;
+
+  if (!user || !user.username || !user.password) {
+    return res.status(401).json({ Alert: "Unauthorized!" });
+  } else {
+    return res
+      .status(200)
+      .json({ username: user.username, password: user.password });
+  }
+};
+
 async function LogOut(req, res) {
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-      return res.status(400).json({ Alert: "Error while logging out!" });
-    } else {
-      return res.status(200).json({ Alert: "User Logged out!" });
-    }
-  });
+  if (req?.session.user) {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ Alert: "Error while logging out!" });
+      } else {
+        return res.status(200).json({ Alert: "User Logged out!" });
+      }
+    });
+  } else {
+    return res.status(500).json({ Alert: "No user was logged in!" });
+  }
 }
 
-module.exports = { Login, LogOut };
+module.exports = { Login, LogOut, status };

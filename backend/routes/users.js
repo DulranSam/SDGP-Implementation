@@ -7,17 +7,7 @@ const userIDController = require("../controllers/userIDControl/userIDControl");
 router.route("/").get(userController.Users).post(userController.CreateUsers);
 
 router.route("/login").post(loginController.Login);
-router.route("/status").post((req, res) => {
-  const { user } = req?.session;
-
-  if (!user || !user.username || !user.password) {
-    return res.status(401).json({ Alert: "Unauthorized!" });
-  } else {
-    return res
-      .status(200)
-      .json({ username: user.username, password: user.password });
-  }
-});
+router.route("/status").post(loginController.status);
 
 router.route("/logout").post(loginController.LogOut);
 
