@@ -41,8 +41,8 @@ const CreateQuestion = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post(EndPoint, { answer });
-      if (r.status === 200) {
+      const r = await Axios.post(EndPoint, answer);
+      if (r.data.status === 200) {
         setStatus("Answer Posted!");
       }
 

@@ -8,6 +8,15 @@ const HomePage = (props) => {
   const [time, setTime] = useState("day");
   const [userx, setUser] = useState([]);
 
+  async function GetProgress() {
+    try {
+      const r = await Axios.get("http://localhost:8000/users");
+      setUser(r.data); //let's use the context api rather than passing it down like props!
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     const date = new Date();
     const hour = date.getHours();
@@ -20,15 +29,6 @@ const HomePage = (props) => {
       setTime("Evening");
     }
   }, []);
-
-  async function GetProgress() {
-    try {
-      const r = await Axios.get("http://localhost:8000/users");
-      setUser(r.data); //let's use the context api rather than passing it down like props!
-    } catch (err) {
-      console.error(err);
-    }
-  }
 
   useEffect(() => {
     GetProgress();

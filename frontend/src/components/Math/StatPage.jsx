@@ -39,7 +39,6 @@ const StatPage = () => {
             </MathJaxContext>
             <p>Topic : {x.topic}</p>
             <br />
-
             <br></br>
           </div>
         ))

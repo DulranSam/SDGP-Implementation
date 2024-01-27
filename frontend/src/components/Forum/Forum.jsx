@@ -12,9 +12,8 @@ const Forum = () => {
   async function ForumData() {
     try {
       setLoading(true);
-      const r = await Axios.get(EndPoint).then((r) => {
-        setData(r.data);
-      });
+      const r = await Axios.get(EndPoint);
+      setData(r.data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -29,13 +28,10 @@ const Forum = () => {
         setStatus("");
       }
       setLoading(true);
-      const r = await Axios.post(EndPoint, {
-        body: JSON.stringify({ response: response }),
-      }).then((r) => {
-        if (r.status === 200) {
-          setStatus("Question Added");
-        }
-      });
+      const r = await Axios.post(EndPoint, response);
+      if (r.data.status === 200) {
+        setStatus("Question Added");
+      }
     } catch (err) {
       setStatus("Error Occured, please try again");
       console.error(err);

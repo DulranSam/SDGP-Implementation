@@ -16,6 +16,20 @@ const helmet = require("helmet");
 const dashboard = require("./routes/dashboard");
 const gemini = require("./routes/gemini");
 
+function checker(req, res) {
+  if (req.session.user) {
+    console.log(``);
+  }
+}
+
+function authenticated(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    return res.status(401).json({ Alert: "Not logged in!" });
+  }
+}
+
 app.use(cors({ origin: "*" })); //allow access from anywhere FOR NOW
 app.use(helmet()); //to protect the api
 app.use(express.urlencoded());
@@ -29,7 +43,9 @@ app.use(
     cookie: { maxAge: 60000 }, // session timeout of 60 seconds
   })
 );
+
 app.use("/users", users);
+// app.use(authenticated);
 app.use("/gpts", gpt);
 app.use("/admins", adminPage);
 app.use("/socials", social);
@@ -54,7 +70,6 @@ app.use("*", (req, res) => {
 });
 
 async function start() {
-  // await SQLServer.SQLConnect();
   await mongoose.connect(
     cluster,
     { useNewUrlParser: true },

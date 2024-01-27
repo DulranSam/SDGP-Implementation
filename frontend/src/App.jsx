@@ -16,24 +16,29 @@ import GPTLinked from "./components/Api/GPTLinked";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Gemini from "./components/Api/Gemini/GeminiLinked";
 import Unknown from "./components/Exceptions/Unknown";
+import MuiPage from "./components/MUI";
+
+//We need to reorganize this to pass props in the context provider , this is very messy!
+//we could possibly use redux for global state management , will make life easier!
 
 export const userContext = createContext();
 function App() {
-  const [user, setUser] = useState(); //setter should contain details of user to pass around as props
+  const [user, setUser] = useState("tester"); //let's modify to props later
+  const [rank, setRank] = useState(100);
   const [isLogged, setIsLogged] = useState(false);
-
-  //We need to reorganize this to pass props in the context provider , this is very messy!
-  //we could possibly use redux for global state management , will make life easier!
 
   return (
     <>
       <BrowserRouter>
-        <userContext.Provider value={(user, setUser, isLogged, setIsLogged)}>
+        <userContext.Provider
+          value={(user, setUser, isLogged, setIsLogged, rank, setRank)}
+        >
           <Routes>
             <Route
               path="/"
               element={<HomePage username={user} isLogged={true}></HomePage>}
             ></Route>
+            <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
             <Route path="/gemini" element={<Gemini></Gemini>}></Route>
 
             <Route path="/stat" element={<StatPage></StatPage>}></Route>
@@ -64,7 +69,7 @@ function App() {
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/gpt" element={<GPTLinked></GPTLinked>}></Route>
             <Route path="/dash" element={<Dashboard></Dashboard>}></Route>
-            <Route path="*" element={<Unknown></Unknown>}></Route>
+            <Route path="*" element={<Unknown />}></Route>
           </Routes>
         </userContext.Provider>
       </BrowserRouter>

@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { userContext } from "../../App";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  const datax = useContext(userContext);
+  const { user, rank } = datax;
+
   //let's pass these down from the App component , makes life easier!
-  const [user, setUser] = useState("tester"); //let's modify to props later
-  const [rank, setRank] = useState(100);
+
   const [progress, setProg] = useState({
     //how we're going to predict this is something we still need to think about
     statistics: "",

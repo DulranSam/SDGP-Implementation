@@ -32,29 +32,30 @@ const AddStat = () => {
     }
   }
 
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <h1>Add Statistics Questions</h1>
       <form onSubmit={AddQuestion}>
         <input
           ref={topicRef}
-          onChange={(e) => {
-            setData({ ...data, topic: e.target.value });
-          }}
+          onChange={handleChange}
+          name="topic"
           placeholder="Enter topic..."
         ></input>
         <input
           ref={questionRef}
-          onChange={(e) => {
-            setData({ ...data, question: e.target.value });
-          }}
+          onChange={handleChange}
+          name="question"
           placeholder="Enter Question..."
         ></input>
         <input
           ref={answerRef}
-          onChange={(e) => {
-            setData({ ...data, answer: e.target.value });
-          }}
+          onChange={handleChange}
+          name="answer"
           placeholder="Enter Answer..."
         ></input>
         <button type="submit" disabled={loading}>

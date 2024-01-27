@@ -14,9 +14,7 @@ function Gemini() {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await Axios.post(endPoint, {
-        search: search,
-      });
+      const response = await Axios.post(endPoint, search);
       setData(response.data);
     } catch (err) {
       console.error(err);

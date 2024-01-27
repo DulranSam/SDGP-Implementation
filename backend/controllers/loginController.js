@@ -37,6 +37,7 @@ async function Login(req, res) {
           expiresIn: "1d",
         }
       );
+
       req.session.user = { username, password, maxAge: 60000 };
       await res.cookie(
         "user",
