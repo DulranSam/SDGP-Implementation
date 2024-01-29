@@ -16,14 +16,9 @@ const helmet = require("helmet");
 const dashboard = require("./routes/dashboard");
 const gemini = require("./routes/gemini");
 
-function checker(req, res) {
-  if (req.session.user) {
-    console.log(``);
-  }
-}
-
 function authenticated(req, res, next) {
   if (req.session.user) {
+    console.log("Authenticated!");
     next();
   } else {
     return res.status(401).json({ Alert: "Not logged in!" });
@@ -45,7 +40,7 @@ app.use(
 );
 
 app.use("/users", users);
-// app.use(authenticated);
+// app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
 app.use("/gpts", gpt);
 app.use("/admins", adminPage);
 app.use("/socials", social);

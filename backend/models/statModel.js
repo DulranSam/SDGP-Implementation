@@ -15,6 +15,16 @@ const statSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    cordinates: {
+      type: Array,
+      default: [],
+      x: {
+        type: Number,
+      },
+      y: {
+        type: Number,
+      },
+    },
   },
   { timestamps: true }
 );

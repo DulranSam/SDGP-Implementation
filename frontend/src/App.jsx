@@ -1,10 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StatPage from "./components/Math/StatPage";
-import PureMath from "./components/Math/PureMath";
+import StatPage from "./components/Math/Stat/StatPage";
+import PureMath from "./components/Math/PureMath/PureMath";
 import HomePage from "./components/Main/HomePage";
-import AddStat from "./components/Math/AddStat";
-import AddPure from "./components/Math/AddPure";
+import AddStat from "./components/Math/Stat/AddStat";
+import AddPure from "./components/Math/PureMath/AddPure";
 import ViewUsers from "./components/Users/ViewUsers";
 import "./App.css";
 import CreateUsers from "./components/Users/CreateUsers";
@@ -17,6 +17,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Gemini from "./components/Api/Gemini/GeminiLinked";
 import Unknown from "./components/Exceptions/Unknown";
 import MuiPage from "./components/MUI";
+
+import Statistical from "./components/Math/Stat/Test";
 
 //We need to reorganize this to pass props in the context provider , this is very messy!
 //we could possibly use redux for global state management , will make life easier!
@@ -33,11 +35,13 @@ function App() {
         <userContext.Provider
           value={(user, setUser, isLogged, setIsLogged, rank, setRank)}
         >
+          <Gemini></Gemini>
           <Routes>
             <Route
               path="/"
               element={<HomePage username={user} isLogged={true}></HomePage>}
             ></Route>
+            <Route path="/marker" element={<Statistical />}></Route>
             <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
             <Route path="/gemini" element={<Gemini></Gemini>}></Route>
 

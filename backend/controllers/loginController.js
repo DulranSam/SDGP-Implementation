@@ -5,7 +5,7 @@ require("dotenv").config();
 const accessTokenX = process.env.ACCESS_TOKEN;
 const refreshTokenX = process.env.REFRESH_TOKEN;
 
-async function Login(req, res) {
+async function Login(req, res, next) {
   const { username, password } = req?.body;
 
   if (!username || !password) {
@@ -49,6 +49,7 @@ async function Login(req, res) {
         Alert: `${username} logged in `,
         AccessToken: accessToken,
         RefreshToken: refreshToken,
+        username: username,
       });
     } else {
       return res.status(401).json({ Alert: `${username} unauthorized` });

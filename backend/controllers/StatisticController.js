@@ -44,4 +44,9 @@ async function CreateQuestions(req, res) {
   }
 }
 
+const answerQuestion = (req, res) => {
+  const { topic, question, answer, cordinates } = req?.body;
+  if (!topic || !question || !answer) return;
+};
+
 module.exports = { StatisticQuestions, CreateQuestions };

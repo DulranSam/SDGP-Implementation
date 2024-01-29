@@ -1,138 +1,68 @@
-/* App.css */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&display=swap");
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
 
 body {
-  font-family: "Poppins", "Arial", sans-serif;
-  margin: 5;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.header {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-.navbar {
-  background-color: #444;
-  padding: 10px;
+  margin: 0;
   display: flex;
-  justify-content: space-around;
-  color: #fff;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #fff;
-  margin: 0 10px;
-  transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-  color: #58a6ff;
-}
-
-.page-content {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.button {
-  background-color: #58a6ff;
-  color: #fff;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #3068b5;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-/* Add this to your App.css or create a new CSS file for HomePage */
-
-.container-fluid {
-  background-color: #f8f9fa;
-  padding: 20px;
-  text-align: center;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
 h1 {
-  color: #007bff;
-}
-
-h2 {
-  font-size: 1.2em;
-  color: #495057;
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
 button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: border-color 0.25s;
 }
-
 button:hover {
-  background-color: #0056b3;
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5em;
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
   }
-
-  h2 {
-    font-size: 1em;
+  a:hover {
+    color: #747bff;
   }
-
   button {
-    padding: 8px 12px;
-    margin: 8px;
-  }
-}
-
-/* Add more specific styling for individual components as needed */
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+    background-color: #f9f9f9;
   }
 }

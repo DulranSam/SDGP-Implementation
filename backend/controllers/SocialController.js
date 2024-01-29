@@ -1,8 +1,12 @@
 const forumModel = require("../models/forum");
 
 async function GetUsers(req, res) {
-  const forumData = await forumModel.find();
-  res.json(forumData);
+  try {
+    const forumData = await forumModel.find();
+    res.json(forumData);
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 async function CreateQuestions(req, res) {
