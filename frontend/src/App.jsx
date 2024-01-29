@@ -19,6 +19,7 @@ import Unknown from "./components/Exceptions/Unknown";
 import MuiPage from "./components/MUI";
 
 import Statistical from "./components/Math/Stat/Test";
+import Study from "./components/StudyMaterials/Study";
 
 //We need to reorganize this to pass props in the context provider , this is very messy!
 //we could possibly use redux for global state management , will make life easier!
@@ -54,7 +55,7 @@ function App() {
             <Route path="/marker" element={<Statistical />}></Route>
             <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
             <Route path="/gemini" element={<Gemini></Gemini>}></Route>
-
+            <Route path="/study" element={<Study />}></Route>
             <Route path="/stat" element={<StatPage></StatPage>}></Route>
             <Route path="/stat/addstat" element={<AddStat></AddStat>}></Route>
             <Route path="/puremath" element={<PureMath></PureMath>}></Route>
