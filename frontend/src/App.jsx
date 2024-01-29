@@ -27,13 +27,23 @@ export const userContext = createContext();
 function App() {
   const [user, setUser] = useState("tester"); //let's modify to props later
   const [rank, setRank] = useState(100);
+  const [loading, setLoading] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
 
   return (
     <>
       <BrowserRouter>
         <userContext.Provider
-          value={(user, setUser, isLogged, setIsLogged, rank, setRank)}
+          value={
+            (user,
+            setUser,
+            isLogged,
+            setIsLogged,
+            rank,
+            setRank,
+            loading,
+            setLoading)
+          }
         >
           <Gemini></Gemini>
           <Routes>

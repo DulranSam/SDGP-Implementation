@@ -15,6 +15,7 @@ const fs = require("fs");
 const helmet = require("helmet");
 const dashboard = require("./routes/dashboard");
 const gemini = require("./routes/gemini");
+const learningMaterial = require("./routes/learn");
 
 function authenticated(req, res, next) {
   if (req.session.user) {
@@ -41,6 +42,7 @@ app.use(
 
 app.use("/users", users);
 // app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
+app.use("/resources", learningMaterial);
 app.use("/gpts", gpt);
 app.use("/admins", adminPage);
 app.use("/socials", social);

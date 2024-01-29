@@ -23,6 +23,7 @@ async function Login(req, res, next) {
 
     if (isPasswordValid) {
       const accessToken = jwt.sign(
+        //this is high level!
         { user: { username, password } },
         accessTokenX,
         {
@@ -38,8 +39,9 @@ async function Login(req, res, next) {
         }
       );
 
-      req.session.user = { username, password, maxAge: 60000 };
+      req.session.user = { username, password, maxAge: 60000 }; //this is not!
       await res.cookie(
+        //optional
         "user",
         { username, password },
         { maxAge: 60000, httpOnly: true }

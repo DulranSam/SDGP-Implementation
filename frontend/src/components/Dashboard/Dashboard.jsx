@@ -9,6 +9,10 @@ const Dashboard = () => {
 
   //let's pass these down from the App component , makes life easier!
 
+  // useEffect(()=>{
+
+  // })
+
   const [progress, setProg] = useState({
     //how we're going to predict this is something we still need to think about
     statistics: "",
