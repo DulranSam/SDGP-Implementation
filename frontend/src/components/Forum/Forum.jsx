@@ -8,48 +8,18 @@ const Forum = () => {
   const [response, setResponse] = useState("");
   const [status, setStatus] = useState("");
 
-  let upvotes = 0;
-
   const EndPoint = "http://localhost:8000/socials";
 
-  async function ForumData() {
+  const increaseVotes = async (id) => {
     try {
       setLoading(true);
-      const r = await Axios.get(EndPoint);
-      setData(r.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function AddQuestion(e) {
-    e.preventDefault();
-    try {
-      if (status !== "") {
-        setStatus("");
-      }
-      setLoading(true);
-      const r = await Axios.post(EndPoint, response);
-      if (r.data.status === 200) {
-        setStatus("Question Added");
-      }
-    } catch (err) {
-      setStatus("Error Occured, please try again");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  //UPVOTING SYSTEM 👇🏻
-  const IncreaseVotes = async (id) => {
-    //increase upvotes by 1
-    try {
-      setLoading(true);
-      upvotes++;
-      const upvote = await Axios.put(`${EndPoint}/x/${id}`, upvotes);
+      const updatedData = data.map((item) =>
+        item._id === id ? { ...item, rating: item.rating + 1 } : item
+      );
+      setData(updatedData);
+      const upvote = await Axios.put(`${EndPoint}/x/${id}`, {
+        rating: updatedData.find((item) => item._id === id)?.rating,
+      });
       if (upvote.data.response.status === 200) {
         setStatus("Upvoted!");
       }
@@ -60,8 +30,40 @@ const Forum = () => {
     }
   };
 
+  const forumData = async () => {
+    try {
+      setLoading(true);
+      const response = await Axios.get(EndPoint);
+      setData(response.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const addQuestion = async (e) => {
+    e.preventDefault();
+    try {
+      if (status !== "") {
+        setStatus("");
+      }
+      setLoading(true);
+      const response = await Axios.put(EndPoint, { question: response });
+      if (response.data.status === 200) {
+        setStatus("Question Added");
+        forumData(); // Refresh the data after adding a question
+      }
+    } catch (err) {
+      setStatus("Error Occurred, please try again");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    ForumData();
+    forumData();
   }, []);
 
   return (
@@ -71,8 +73,9 @@ const Forum = () => {
         : data.map((x) => (
             <div key={x._id}>
               <h1>{x.question}</h1>
+              <h2>{x?.answer ? x.answer : "Be the first to Answer! 🥳"}</h2>
               <p>{`Upvoted by ${x.rating}`}</p>
-              <form onSubmit={AddQuestion}>
+              <form onSubmit={addQuestion}>
                 <input
                   onChange={(e) => {
                     setResponse(e.target.value);
@@ -84,10 +87,10 @@ const Forum = () => {
                   {loading ? "Loading..." : "Submit"}
                 </button>
                 <button
-                  type="submit"
+                  type="button"
                   disabled={loading}
                   onClick={() => {
-                    IncreaseVotes(x._id);
+                    increaseVotes(x._id);
                   }}
                 >
                   {loading ? "Loading..." : "Rate"}

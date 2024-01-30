@@ -2,8 +2,7 @@ const userData = require("../../models/users");
 const forumModel = require("../../models/forum");
 
 async function DeleteUsers(req, res) {
-  const { id } = req?.params;
-
+  const id = req?.params?.id;
   if (!id) return res.status(400).json({ Alert: "No ID found" });
 
   const deleteQuestion = await userData.findOneAndDelete({
@@ -17,7 +16,7 @@ async function DeleteUsers(req, res) {
 }
 
 async function UpdateUsers(req, res) {
-  const { id } = req?.params;
+  const id = req?.params?.id;
 
   if (!id) return res.status(400).json({ Alert: "No ID found" });
 
@@ -32,7 +31,7 @@ async function UpdateUsers(req, res) {
 }
 
 const Upvoted = async (req, res) => {
-  const id = req.params.id;
+  const id = req?.params?.id;
   const upvotes = req?.body.upvotes;
 
   try {

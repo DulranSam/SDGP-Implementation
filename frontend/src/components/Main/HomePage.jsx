@@ -73,6 +73,11 @@ const HomePage = () => {
           help of personalized learning ✨. So join us on this adventure to ace
           your A-Levels like a Champ 🏆
         </h2>
+        <button>
+          <Link to="/login">
+            What you waiting for ? Click here to get started! 🏆🥂
+          </Link>
+        </button>
       </div>
     </div>
   );
