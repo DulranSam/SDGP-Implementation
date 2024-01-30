@@ -1,8 +1,8 @@
-const questionBody = require("../models/wrongQuestions");
+const tracePure = require("../models/tracePure");
 
 const getQuestion = async (req, res) => {
   try {
-    const data = await questionBody.find().sort("createdAt");
+    const data = await tracePure.find().sort("createdAt");
     return res.status(200).json(data);
   } catch (err) {
     console.error(err);
@@ -14,10 +14,10 @@ const createWrongQuestion = async (req, res) => {
   if (!question || !answer || !type)
     return res.status(400).json({ Alert: "Missing Question/Answer/Type!" });
   try {
-    const questionVerify = await questionBody.find({ question });
+    const questionVerify = await tracePure.find({ question });
 
     if (!questionVerify) {
-      const wrongQuestion = await questionBody.create({
+      const wrongQuestion = await tracePure.create({
         question,
         answer,
         type,

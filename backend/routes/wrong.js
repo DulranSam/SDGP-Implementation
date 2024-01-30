@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const wrongControl = require("../controllers/wrong");
+const wrongControl = require("../controllers/wrongPure");
 
 router
   .route("/")

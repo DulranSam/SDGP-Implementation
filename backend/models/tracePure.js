@@ -16,13 +16,13 @@ const forumSchema = mongoose.Schema(
       trim: true,
       min: 5,
     },
-    connected: {
-      type: mongoose.Schema.ObjectId,
-      ref: "users",
-    },
+    // connected: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "users",
+    // },
   },
   { timestamps: true }
 );
 
-const forumModel = mongoose.Schema("traceStats", forumSchema);
+const forumModel = mongoose.Schema("puretraces", forumSchema);
 module.exports = forumModel;
