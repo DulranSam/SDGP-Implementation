@@ -27,7 +27,7 @@ const createWrongQuestion = async (req, res) => {
       } else {
         return res
           .status(201)
-          .send({ Alert: "Question Added to wrong questions!" });
+          .send({ Alert: "Question Added to wrong statistics questions!" });
       }
     } else {
       return res.status(409).json({ Alert: "Question already exists!" });

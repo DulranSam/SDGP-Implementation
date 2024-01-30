@@ -11,8 +11,8 @@ const GPTLinked = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await GPTSearch(search);
-      setData(response);
+      const data = await GPTSearch(search);
+      setData(data);
     } catch (err) {
       console.error(err);
     } finally {

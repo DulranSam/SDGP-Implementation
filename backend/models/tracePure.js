@@ -3,7 +3,6 @@ const forumSchema = mongoose.Schema(
   {
     question: {
       type: String,
-      required: true,
       trim: true,
     },
     answer: {
@@ -12,7 +11,6 @@ const forumSchema = mongoose.Schema(
     },
     topic: {
       type: String,
-      required: true,
       trim: true,
       min: 5,
     },
