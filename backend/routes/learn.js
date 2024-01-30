@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const learningModel = require("../models/learningResources");
+//needs to be put in a controller
 
 router
   .route("/")
