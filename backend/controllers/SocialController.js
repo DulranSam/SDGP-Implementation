@@ -3,9 +3,10 @@ const forumModel = require("../models/forum");
 async function GetUsers(req, res) {
   try {
     const forumData = await forumModel.find();
-    res.json(forumData);
+    return res.status(200).json(forumData);
   } catch (err) {
     console.error(err);
+    return res.status(500).json({ Alert: err.message });
   }
 }
 

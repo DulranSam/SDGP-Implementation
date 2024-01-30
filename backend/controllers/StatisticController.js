@@ -46,7 +46,7 @@ async function CreateQuestions(req, res) {
 
 const answerQuestion = (req, res) => {
   const { topic, question, answer, cordinates } = req?.body;
-  if (!topic || !question || !answer) return;
+  if (!answer) return res.status(400).json({ Alert: "No Answer Provided" });
 };
 
 module.exports = { StatisticQuestions, CreateQuestions };

@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { userContext } from "../../App";
 
-const HomePage = (props) => {
-  const { user, isLogged } = props;
+const HomePage = () => {
+  const { user, isLogged } = useContext(userContext);
   const [time, setTime] = useState("day");
   const [userx, setUser] = useState([]);
 
@@ -72,23 +73,6 @@ const HomePage = (props) => {
           help of personalized learning ✨. So join us on this adventure to ace
           your A-Levels like a Champ 🏆
         </h2>
-        <div>
-          <Link to="/adduser">
-            <button>Click Here to Register</button>
-          </Link>
-          <Link to="/login">
-            <button>Already have an account? Click here to login ✨</button>
-          </Link>
-          <Link to="/stat">
-            <button>StatPage</button>
-          </Link>
-          <Link to="/puremath">
-            <button>PureMath</button>
-          </Link>
-          <Link to="/forum">
-            <button>Visit Forum</button>
-          </Link>
-        </div>
       </div>
     </div>
   );

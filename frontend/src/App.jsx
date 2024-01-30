@@ -20,6 +20,8 @@ import MuiPage from "./components/MUI";
 
 import Statistical from "./components/Math/Stat/Test";
 import Study from "./components/StudyMaterials/Study";
+import Navbar from "./components/Misc/Navbar";
+import ExamPage from "./components/TestPage/exam";
 
 //We need to reorganize this to pass props in the context provider , this is very messy!
 //we could possibly use redux for global state management , will make life easier!
@@ -46,12 +48,10 @@ function App() {
             setLoading)
           }
         >
-          <Gemini></Gemini>
+          <Navbar />
           <Routes>
-            <Route
-              path="/"
-              element={<HomePage username={user} isLogged={true}></HomePage>}
-            ></Route>
+            <Route path="/" element={<HomePage></HomePage>}></Route>
+            <Route path="/exam" element={<ExamPage />}></Route>
             <Route path="/marker" element={<Statistical />}></Route>
             <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
             <Route path="/gemini" element={<Gemini></Gemini>}></Route>
@@ -65,15 +65,7 @@ function App() {
             ></Route>
             <Route
               path="/adduser"
-              element={
-                <CreateUsers
-                  setUser={(user) => {
-                    setUser(user);
-                  }}
-                  user={user}
-                  isLogged={setIsLogged}
-                ></CreateUsers>
-              }
+              element={<CreateUsers></CreateUsers>}
             ></Route>
             <Route path="/viewusers" element={<ViewUsers></ViewUsers>}></Route>
             <Route path="/forum" element={<Forum></Forum>}></Route>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Axios from "axios";
+
+import { GPTSearch } from "./Api";
 
 const GPTLinked = () => {
   const [loading, setLoading] = useState(false);
@@ -10,8 +11,8 @@ const GPTLinked = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const r = await Axios.post("http://localhost:8000/gpts", search);
-      setData(r.data);
+      const response = await GPTSearch(search);
+      setData(response);
     } catch (err) {
       console.error(err);
     } finally {

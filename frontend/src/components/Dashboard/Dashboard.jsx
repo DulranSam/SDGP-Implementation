@@ -7,29 +7,19 @@ const Dashboard = () => {
   const datax = useContext(userContext);
   const { user, rank } = datax;
 
-  //let's pass these down from the App component , makes life easier!
-
-  // useEffect(()=>{
-
-  // })
-
   const [progress, setProg] = useState({
     //how we're going to predict this is something we still need to think about
-    statistics: "",
-    puremaths: "",
+    statistics: 75,
+    puremaths: 50,
   });
-
-  // useEffect(() => {
-  //   setRank(rank + 1); //just testing
-  // }, [rank]);
 
   const { statistics, puremaths } = progress;
 
   return (
     <div>
-      <h1>Welcome back {user}!</h1>
-      <div>You are rank #{rank}</div>
-      <div className="progress" style={{ border: "12px black" }}>
+      <h1>Dashboard</h1>
+      <h2>Good Morning {user}!</h2>
+      <div className="progress">
         <label>
           <div
             className="stateProg"

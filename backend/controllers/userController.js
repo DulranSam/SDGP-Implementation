@@ -1,17 +1,23 @@
 const userData = require("../models/users");
 const HashPass = require("./secure/Hashing");
 async function Users(req, res) {
-  const users = await userData.find();
-  if (users.length) {
-    res.status(200).json(users);
-  } else {
-    res.status(400).json({ Alert: "No users found!" });
+  try {
+    const users = await userData.find();
+    if (users.length) {
+      return res.status(200).json(users);
+    } else {
+      return res.status(400).json({ Alert: "No users found!" });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(err.message);
   }
 }
 
 async function CreateUsers(req, res) {
   try {
     const { username, password, mail } = req?.body;
+    const photo = req?.file;
 
     if (!username || !password || !mail) {
       return res
@@ -32,7 +38,7 @@ async function CreateUsers(req, res) {
         username,
         password: hashedPWD,
         mail,
-        // photo: req.file ? req.file.filename : null,
+        photo,
       });
 
       req.session.user = { username, password };

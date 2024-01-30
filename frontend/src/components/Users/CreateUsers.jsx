@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Axios from "axios";
+import { userContext } from "../../App";
+import { useContext } from "react";
 
-const CreateUsers = (props) => {
-  // const { setUser, user, isLogged } = props;
+const CreateUsers = () => {
+  const { setUser, user, isLogged } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Axios from "axios";
+import { userContext } from "../../App";
 
 const Login = () => {
+  const { setLogged } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -16,6 +18,7 @@ const Login = () => {
       const r = await Axios.post("http://localhost:8000/users/login", data);
       if (r.status === 200) {
         setStatus("User Logged In");
+        setLogged(true);
         navigator("/"); //go to homepage
       } else if (r.status === 403) {
         setStatus("Invalid username or password");
