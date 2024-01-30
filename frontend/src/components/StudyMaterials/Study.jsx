@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import Axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../../App";
+import { AddMaterial, FetchMaterial } from "../Api/Api";
 
 const Study = () => {
   const { loading, setLoading, status, setStatus } = useContext(userContext);
@@ -13,11 +13,12 @@ const Study = () => {
     about: "",
     subtopic: "",
   });
+
   const fetchMaterial = async () => {
     try {
       setLoading(true);
-      const resources = await Axios.get("http://localhost:8000/resources");
-      setMaterial(resources?.data);
+      const resources = await FetchMaterial();
+      setMaterial(resources);
     } catch (err) {
       console.error(err);
     } finally {
@@ -29,10 +30,7 @@ const Study = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const resources = await Axios.post(
-        "http://localhost:8000/resources",
-        data
-      );
+      const resources = await AddMaterial(data);
       if (resources.status === 201) {
         setStatus("Added Resource!");
       } else {

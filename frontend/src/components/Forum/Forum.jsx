@@ -44,17 +44,21 @@ const Forum = () => {
   }
 
   //UPVOTING SYSTEM 👇🏻
-  // const upvote = async () => {
-  //   //increase upvotes by 1
-  //   try {
-  //     setLoading(true);
-  //     const upvote = await Axios.put(`${EndPoint}`, upvotes);
-  //   } catch (err) {
-  //     console.error(err);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const IncreaseVotes = async (id) => {
+    //increase upvotes by 1
+    try {
+      setLoading(true);
+      upvotes++;
+      const upvote = await Axios.put(`${EndPoint}/x/${id}`, upvotes);
+      if (upvote.data.response.status === 200) {
+        setStatus("Upvoted!");
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     ForumData();
@@ -83,7 +87,7 @@ const Forum = () => {
                   type="submit"
                   disabled={loading}
                   onClick={() => {
-                    upvotes++;
+                    IncreaseVotes(x._id);
                   }}
                 >
                   {loading ? "Loading..." : "Rate"}

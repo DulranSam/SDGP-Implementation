@@ -13,4 +13,6 @@ router
   .delete(socialIDController.DeleteUsers)
   .put(socialIDController.UpdateUsers);
 
+router.route("/x/:id").put(socialIDController.Upvoted);
+
 module.exports = router;

@@ -28,3 +28,21 @@ export async function GPTSearch(search) {
     console.error(err);
   }
 }
+
+export async function FetchMaterial() {
+  try {
+    const resources = await Axios.get("http://localhost:8000/resources");
+    return resources?.data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function AddMaterial(data) {
+  try {
+    const resources = await Axios.post("http://localhost:8000/resources", data);
+    return resources.data;
+  } catch (err) {
+    console.error(err);
+  }
+}

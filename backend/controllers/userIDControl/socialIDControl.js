@@ -1,4 +1,5 @@
 const userData = require("../../models/users");
+const forumModel = require("../../models/forum");
 
 async function DeleteUsers(req, res) {
   const { id } = req?.params;
@@ -30,4 +31,25 @@ async function UpdateUsers(req, res) {
   }
 }
 
-module.exports = { DeleteUsers, UpdateUsers };
+const Upvoted = async (req, res) => {
+  const id = req.params.id;
+  const upvotes = req?.body.upvotes;
+
+  try {
+    const forumPost = await forumModel.findById(id);
+
+    if (!forumPost) {
+      return res.status(400).json({ Alert: "Invalid User!" });
+    } else {
+      forumPost.rating = upvotes;
+
+      const updatedPost = await forumPost.save();
+      return res.status(200).json({ Alert: `Updated!`, updatedPost });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ Alert: "Internal Server Error" });
+  }
+};
+
+module.exports = { DeleteUsers, UpdateUsers, Upvoted };
