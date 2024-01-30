@@ -30,7 +30,7 @@ async function CreateUsers(req, res) {
     });
 
     if (!userExists) {
-      let savedPhoto;
+      let savedPhoto; //cloudinary
 
       const hashedPWD = new HashPass(password).getHashedPassword();
 
@@ -38,7 +38,7 @@ async function CreateUsers(req, res) {
         username,
         password: hashedPWD,
         mail,
-        photo,
+        photo, //save cloudinary secureURL
       });
 
       req.session.user = { username, password };
