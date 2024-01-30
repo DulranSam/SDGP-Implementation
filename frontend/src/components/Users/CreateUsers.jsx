@@ -87,7 +87,7 @@ const CreateUsers = () => {
           type="file"
         ></input>
         <button type="submit" disabled={loading}>
-          {loading ? "Loading..." : "Create User"}
+          {loading ? "Loading..." : "Register"}
         </button>
       </form>
       <p>{status}</p>

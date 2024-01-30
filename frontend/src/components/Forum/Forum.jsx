@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import { BallTriangle } from "react-loader-spinner";
 
 const Forum = () => {
   const [data, setData] = useState([]);
@@ -68,37 +69,41 @@ const Forum = () => {
 
   return (
     <div>
-      {loading
-        ? "Loading..."
-        : data.map((x) => (
-            <div key={x._id}>
-              <h1>{x.question}</h1>
-              <h2>{x?.answer ? x.answer : "Be the first to Answer! 🥳"}</h2>
-              <p>{`Upvoted by ${x.rating}`}</p>
-              <form onSubmit={addQuestion}>
-                <input
-                  onChange={(e) => {
-                    setResponse(e.target.value);
-                  }}
-                  placeholder="Enter your response"
-                  type="text"
-                ></input>
-                <button type="submit" disabled={loading}>
-                  {loading ? "Loading..." : "Submit"}
-                </button>
-                <button
-                  type="button"
-                  disabled={loading}
-                  onClick={() => {
-                    increaseVotes(x._id);
-                  }}
-                >
-                  {loading ? "Loading..." : "Rate"}
-                </button>
-              </form>
-              {status}
-            </div>
-          ))}
+      {loading ? (
+        <BallTriangle />
+      ) : data && data.length ? (
+        data.map((x) => (
+          <div key={x._id}>
+            <h1>{x.question}</h1>
+            <h2>{x?.answer ? x.answer : "Be the first to Answer! 🥳"}</h2>
+            <p>{`Upvoted by ${x.rating}`}</p>
+            <form onSubmit={addQuestion}>
+              <input
+                onChange={(e) => {
+                  setResponse(e.target.value);
+                }}
+                placeholder="Enter your response"
+                type="text"
+              ></input>
+              <button type="submit" disabled={loading}>
+                {loading ? "Loading..." : "Submit"}
+              </button>
+              <button
+                type="button"
+                disabled={loading}
+                onClick={() => {
+                  increaseVotes(x._id);
+                }}
+              >
+                {loading ? <BallTriangle /> : "Rate"}
+              </button>
+            </form>
+            {status}
+          </div>
+        ))
+      ) : (
+        <h1>No forum questions added yet!</h1>
+      )}
     </div>
   );
 };

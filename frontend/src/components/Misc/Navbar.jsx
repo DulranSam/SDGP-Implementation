@@ -31,9 +31,6 @@ const Navbar = () => {
       <Link to="/exam" style={linkStyle}>
         Exam
       </Link>
-      <Link to="/gemini" style={linkStyle}>
-        ChatBot
-      </Link>
     </div>
   );
 };

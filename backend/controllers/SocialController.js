@@ -1,9 +1,15 @@
 const forumModel = require("../models/forum");
 
 async function GetUsers(req, res) {
+  const { topic } = req?.body;
   try {
-    const forumData = await forumModel.find();
-    return res.status(200).json(forumData);
+    if (!topic) {
+      const forumData = await forumModel.find().sort("createdAt");
+      return res.status(200).json(forumData);
+    } else {
+      const topicRelated = await forumModel.find({ topic });
+      return res.status(200).json(topicRelated);
+    }
   } catch (err) {
     console.error(err);
     return res.status(500).json({ Alert: err.message });

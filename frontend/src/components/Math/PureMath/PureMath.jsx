@@ -40,7 +40,7 @@ const PureMath = () => {
             </div>
           ))
         ) : (
-          <h2>No results found</h2>
+          <h2>No Pure Math Questions found</h2>
         )}
         <Link to="/puremath/addpure">Add Pure Maths Questions</Link>
         <br></br>

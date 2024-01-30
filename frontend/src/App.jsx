@@ -17,7 +17,6 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Gemini from "./components/Api/Gemini/GeminiLinked";
 import Unknown from "./components/Exceptions/Unknown";
 import MuiPage from "./components/MUI";
-
 import Statistical from "./components/Math/Stat/Test";
 import Study from "./components/StudyMaterials/Study";
 import Navbar from "./components/Misc/Navbar";
@@ -49,12 +48,12 @@ function App() {
           }
         >
           <Navbar />
+          <Gemini />
           <Routes>
             <Route path="/" element={<HomePage></HomePage>}></Route>
             <Route path="/exam" element={<ExamPage />}></Route>
             <Route path="/marker" element={<Statistical />}></Route>
             <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
-            <Route path="/gemini" element={<Gemini></Gemini>}></Route>
             <Route path="/study" element={<Study />}></Route>
             <Route path="/stat" element={<StatPage></StatPage>}></Route>
             <Route path="/stat/addstat" element={<AddStat></AddStat>}></Route>
