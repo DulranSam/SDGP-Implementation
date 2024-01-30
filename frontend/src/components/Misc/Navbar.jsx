@@ -22,7 +22,7 @@ const Navbar = () => {
       <Link to="/forum" style={linkStyle}>
         Forum
       </Link>
-      <Link to="/register" style={linkStyle}>
+      <Link to="/adduser" style={linkStyle}>
         Register
       </Link>
       <Link to="/login" style={linkStyle}>

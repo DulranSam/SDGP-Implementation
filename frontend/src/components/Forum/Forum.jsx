@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import Axios from "axios";
 
@@ -6,6 +7,8 @@ const Forum = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState("");
   const [status, setStatus] = useState("");
+
+  let upvotes = 0;
 
   const EndPoint = "http://localhost:8000/socials";
 
@@ -40,6 +43,19 @@ const Forum = () => {
     }
   }
 
+  //UPVOTING SYSTEM 👇🏻
+  // const upvote = async () => {
+  //   //increase upvotes by 1
+  //   try {
+  //     setLoading(true);
+  //     const upvote = await Axios.put(`${EndPoint}`, upvotes);
+  //   } catch (err) {
+  //     console.error(err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   useEffect(() => {
     ForumData();
   }, []);
@@ -51,6 +67,7 @@ const Forum = () => {
         : data.map((x) => (
             <div key={x._id}>
               <h1>{x.question}</h1>
+              <p>{`Upvoted by ${x.rating}`}</p>
               <form onSubmit={AddQuestion}>
                 <input
                   onChange={(e) => {
@@ -62,11 +79,19 @@ const Forum = () => {
                 <button type="submit" disabled={loading}>
                   {loading ? "Loading..." : "Submit"}
                 </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  onClick={() => {
+                    upvotes++;
+                  }}
+                >
+                  {loading ? "Loading..." : "Rate"}
+                </button>
               </form>
               {status}
             </div>
           ))}
-      <h1>As of right now this , nothing will be displayed!</h1>
     </div>
   );
 };

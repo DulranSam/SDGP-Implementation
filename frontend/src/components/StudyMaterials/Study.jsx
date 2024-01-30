@@ -15,20 +15,20 @@ const Study = () => {
   });
   const fetchMaterial = async () => {
     try {
-      // setLoading(true);
+      setLoading(true);
       const resources = await Axios.get("http://localhost:8000/resources");
       setMaterial(resources?.data);
     } catch (err) {
       console.error(err);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
   const addMaterial = async (e) => {
     e.preventDefault();
     try {
-      // setLoading(true);
+      setLoading(true);
       const resources = await Axios.post(
         "http://localhost:8000/resources",
         data
@@ -41,7 +41,7 @@ const Study = () => {
     } catch (err) {
       console.error(err);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -59,7 +59,7 @@ const Study = () => {
       <p>
         {loading ? (
           "Loading..."
-        ) : material && material ? (
+        ) : material && material.length ? (
           JSON.stringify(material)
         ) : (
           <h1>No materials added yet!</h1> //we can edit the questions from here!

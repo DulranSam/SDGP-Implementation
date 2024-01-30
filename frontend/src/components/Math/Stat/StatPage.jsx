@@ -26,11 +26,10 @@ const StatPage = () => {
 
   return (
     <div>
-      <Link to="/">Back to Homepage?</Link>
       <br></br>
       {loading ? (
         <TailSpin></TailSpin>
-      ) : (
+      ) : data && data.length ? (
         data.map((x, index) => (
           <div key={x._id || index}>
             <br></br>
@@ -42,8 +41,11 @@ const StatPage = () => {
             <br></br>
           </div>
         ))
+      ) : (
+        <h2>No Statistics Questions Added!</h2>
       )}
       <Link to="/stat/addstat">Add Questions</Link>
+      <Link to="/">Back to Homepage?</Link>
     </div>
   );
 };
