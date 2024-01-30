@@ -24,5 +24,5 @@ const forumSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const forumModel = mongoose.Schema("traceStats", forumSchema);
+const forumModel = mongoose.model("statetraces", forumSchema);
 module.exports = forumModel;
