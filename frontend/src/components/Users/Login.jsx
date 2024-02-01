@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import Axios from "axios";
 import { userContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { setLogged } = useContext(userContext);
@@ -51,6 +52,7 @@ const Login = () => {
         <button type="submit" disabled={loading}>
           {loading ? "Loading..." : "Login"}
         </button>
+        <Link to="/forgot">Forgot Password?</Link>
       </form>
     </div>
   );

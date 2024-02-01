@@ -13,6 +13,9 @@ const Navbar = () => {
       <Link to="/" style={linkStyle}>
         Home
       </Link>
+      <Link to="/dash" style={linkStyle}>
+        Dashboard
+      </Link>
       <Link to="/puremath" style={linkStyle}>
         Pure Maths
       </Link>

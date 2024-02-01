@@ -1,15 +1,15 @@
 const pureMaths = require("../models/pureMaths");
 
 async function PureMathQuestions(req, res) {
-  const { simul, integration } = req.body;
+  const { topic } = req.body;
   if (!req.body) {
     const questions = await pureMaths.find().exec();
     res.json(questions);
   } else {
     try {
-      const questions = await pureMaths
-        .find({ $or: { simul, integration } })
-        .exec();
+      const questions = await pureMaths.find({
+        topic,
+      });
 
       res.status(200).json(questions);
     } catch (error) {
