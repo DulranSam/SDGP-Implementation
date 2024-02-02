@@ -4,7 +4,7 @@ import { userContext } from "../../App";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { setIsLogged } = useContext(userContext);
+  const { setIsLogged, setUser } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -20,6 +20,7 @@ const Login = () => {
       if (r.status === 200) {
         setStatus("User Logged In");
         setIsLogged(true);
+        setUser(r.data.response.username);
         navigator("/"); //go to homepage
       } else {
         setStatus("Invalid username or password");

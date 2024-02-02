@@ -11,6 +11,8 @@ const ExamPage = () => {
   const stopButtonRef = useRef();
   const intervalRef = useRef();
 
+  const [value, setValue] = useState("");
+
   const startExamTimer = () => {
     intervalRef.current = setInterval(() => {
       setTime((prev) => prev + 1);
@@ -20,6 +22,16 @@ const ExamPage = () => {
   const stopExamTimer = () => {
     clearInterval(intervalRef.current);
   };
+
+  const [answers, setAnswers] = useState({});
+
+  async function doneExam() {
+    try {
+      setAnswers(value);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const sendExamData = () => {
     stopExamTimer();

@@ -32,7 +32,7 @@ const Dashboard = () => {
   const { statistics, puremaths } = progress;
 
   return (
-    <div style={{ padding: "5%" }}>
+    <div>
       <h1>Dashboard</h1>
       <h2>{`${time},${user}`} </h2>
       <div className="progress">

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import Axios from "axios";
-import { BallTriangle } from "react-loader-spinner";
+import { BallTriangle, FidgetSpinner } from "react-loader-spinner";
 
 const Forum = () => {
   const [data, setData] = useState([]);
@@ -24,6 +24,9 @@ const Forum = () => {
       if (upvote.data.response.status === 200) {
         setStatus("Upvoted!");
       }
+      setInterval(() => {
+        navigator("/forum");
+      }, 2000);
     } catch (err) {
       console.error(err);
     } finally {
@@ -70,7 +73,7 @@ const Forum = () => {
   return (
     <div>
       {loading ? (
-        <BallTriangle />
+        <FidgetSpinner />
       ) : data && data.length ? (
         data.map((x) => (
           <div key={x._id}>
