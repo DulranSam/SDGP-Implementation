@@ -29,6 +29,22 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    statmarks: {
+      type: Number,
+      default: 0,
+    },
+    puremarks: {
+      type: Number,
+      default: 0,
+    },
+    statprog: {
+      type: Number,
+      default: 0,
+    },
+    pureprog: {
+      type: Number,
+      default: 0,
+    },
     questionHistory: {
       type: Object,
       default: {},

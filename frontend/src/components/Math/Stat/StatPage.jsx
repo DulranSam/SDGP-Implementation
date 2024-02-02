@@ -44,7 +44,7 @@ const StatPage = () => {
       ) : (
         <h2>No Statistics Questions Added!</h2>
       )}
-      <Link to="/stat/addstat">Add Questions</Link>
+      <Link to="/stat/addstat">Add Statistics Questions</Link>
       <Link to="/">Back to Homepage?</Link>
     </div>
   );

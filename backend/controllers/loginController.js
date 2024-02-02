@@ -23,7 +23,6 @@ async function Login(req, res, next) {
 
     if (isPasswordValid) {
       const accessToken = jwt.sign(
-        //this is high level!
         { user: { username, password } },
         accessTokenX,
         {
@@ -39,7 +38,7 @@ async function Login(req, res, next) {
         }
       );
 
-      req.session.user = { username, password, maxAge: 60000 }; //this is not!
+      req.session.user = { username, maxAge: 60000 }; // Removed storing password in session
 
       return res.status(200).json({
         Alert: `${username} logged in `,

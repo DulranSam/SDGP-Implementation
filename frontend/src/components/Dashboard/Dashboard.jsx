@@ -25,7 +25,7 @@ const Dashboard = () => {
     } else if (hours < 20) {
       setTime("Good Evening!");
     } else {
-      setTime("What are you doing up late? :)");
+      setTime("Seems like it's late out here 🌚");
     }
   }, [hours]);
 

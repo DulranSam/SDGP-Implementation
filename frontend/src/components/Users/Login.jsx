@@ -18,6 +18,7 @@ const Login = () => {
       setLoading(true);
       const r = await Axios.post("http://localhost:8000/users/login", data);
       if (r.status === 200) {
+        console.log(r.data);
         setStatus("User Logged In");
         setIsLogged(true);
         setUser(r.data.response.username);

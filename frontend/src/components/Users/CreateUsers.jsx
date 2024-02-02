@@ -31,14 +31,11 @@ const CreateUsers = () => {
       formData.append("photo", photo); //form cuz we're sending an image!
 
       setLoading(true);
-      const response = await Axios.post(
-        "http://localhost:8000/users",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      const response = await Axios.post("http://localhost:8000/users", data);
 
+      // {
+      //   headers: { "Content-Type": "multipart/form-data" },
+      // }
       if (response.status === 200) {
         setStatus("Account Created");
         // setUser({ ...user }); //overwrite to parent setUser

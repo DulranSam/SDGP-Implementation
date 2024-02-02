@@ -31,7 +31,7 @@ function App() {
   const [user, setUser] = useState("tester"); //let's modify to props later
   const [rank, setRank] = useState(100);
   const [loading, setLoading] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
 
   return (
     <>
