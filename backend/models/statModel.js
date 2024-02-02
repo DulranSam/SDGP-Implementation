@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const statSchema = mongoose.Schema(
   {
+    pureID: {},
     topic: {
       type: String,
       required: true,
@@ -24,6 +25,10 @@ const statSchema = mongoose.Schema(
       y: {
         type: Number,
       },
+    },
+    wrong: {
+      type: Object,
+      default: {},
     },
   },
   { timestamps: true }

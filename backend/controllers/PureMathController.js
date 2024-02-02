@@ -4,7 +4,7 @@ async function PureMathQuestions(req, res) {
   const { topic } = req.body;
   if (!req.body) {
     const questions = await pureMaths.find().exec();
-    res.json(questions);
+    res.status(200).json(questions);
   } else {
     try {
       const questions = await pureMaths.find({

@@ -12,13 +12,29 @@ const Dashboard = () => {
     statistics: 75,
     puremaths: 50,
   });
+  const [time, setTime] = useState("");
+
+  const today = new Date();
+  const hours = today.getHours();
+
+  useEffect(() => {
+    if (hours < 12) {
+      setTime("Good Morning!");
+    } else if (hours < 17) {
+      setTime("Good Afternoon!");
+    } else if (hours < 20) {
+      setTime("Good Evening!");
+    } else {
+      setTime("What are you doing up late? :)");
+    }
+  }, [hours]);
 
   const { statistics, puremaths } = progress;
 
   return (
-    <div>
+    <div style={{ padding: "5%" }}>
       <h1>Dashboard</h1>
-      <h2>Good Morning {user}!</h2>
+      <h2>{`${time},${user}`} </h2>
       <div className="progress">
         <label>
           <div

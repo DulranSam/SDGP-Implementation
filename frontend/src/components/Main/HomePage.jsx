@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { userContext } from "../../App";
+import MathLive from "../Math";
 
 const HomePage = () => {
   const { user, isLogged } = useContext(userContext);
@@ -37,6 +38,7 @@ const HomePage = () => {
 
   return isLogged ? (
     <div>
+      <MathLive />
       <h1>
         Good {time} , Welcome Back {user}!
       </h1>
@@ -49,9 +51,9 @@ const HomePage = () => {
         <div>
           <p>
             Progress
-            {userx.map((x) => (
-              <div key={x.id}></div>
-            ))}
+            {userx && userx.length
+              ? userx.map((x) => <div key={x.id}></div>)
+              : "No results found!"}
           </p>
         </div>
 

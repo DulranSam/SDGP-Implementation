@@ -2,8 +2,8 @@ const statisticsModel = require("../models/statModel");
 
 async function StatisticQuestions(req, res) {
   try {
-    const questions = await statisticsModel.find();
-    res.json(questions);
+    const questions = await statisticsModel.find().sort("createdAt");
+    res.status(200).json(questions);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -45,6 +45,7 @@ async function CreateQuestions(req, res) {
 }
 
 const AnswerQuestion = (req, res) => {
+  //how are we gonna bind the questions
   const { topic, question, answer, cordinates } = req?.body;
   if (!answer) return res.status(400).json({ Alert: "No Answer Provided" });
 };

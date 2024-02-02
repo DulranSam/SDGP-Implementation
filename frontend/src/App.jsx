@@ -21,6 +21,7 @@ import Statistical from "./components/Math/Stat/Test";
 import Study from "./components/StudyMaterials/Study";
 import Navbar from "./components/Misc/Navbar";
 import ExamPage from "./components/TestPage/exam";
+import ForgotPass from "./components/Users/ForgotPass";
 
 //We need to reorganize this to pass props in the context provider , this is very messy!
 //we could possibly use redux for global state management , will make life easier!
@@ -51,6 +52,7 @@ function App() {
           <Gemini />
           <Routes>
             <Route path="/" element={<HomePage></HomePage>}></Route>
+            <Route path="/forgot" element={<ForgotPass />}></Route>
             <Route path="/exam" element={<ExamPage />}></Route>
             <Route path="/marker" element={<Statistical />}></Route>
             <Route path="/mui" element={<MuiPage></MuiPage>}></Route>

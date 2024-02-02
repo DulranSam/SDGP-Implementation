@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const pureMathsSchema = mongoose.Schema(
   {
+    pureID: {},
     topic: {
       type: String,
       required: true,
@@ -15,6 +16,10 @@ const pureMathsSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+    },
+    wrong: {
+      type: Object,
+      default: {},
     },
   },
   { timestamps: true }

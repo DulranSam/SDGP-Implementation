@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import {
 //   LineChart,
 //   Area,
@@ -8,15 +9,14 @@
 //   ResponsiveContainer,
 // } from "@mui/x-charts";
 // import { BarChart } from "@mui/x-charts/BarChart";
-import { LineChart } from "@mui/x-charts/LineChart";
 
 const MuiPage = () => {
-  // const data = [
-  //   // Your data points here
-  //   { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
-  //   { name: "Feb", uv: 3000, pv: 1398, amt: 2210 },
-  //   // Add more data points as needed
-  // ];
+  const data = [
+    // Your data points here
+    { name: "Jan", uv: 4000, pv: 2400, amt: 2400 },
+    { name: "Feb", uv: 3000, pv: 1398, amt: 2210 },
+    // Add more data points as needed
+  ];
 
   return (
     <div>
@@ -33,16 +33,7 @@ const MuiPage = () => {
       <h1>Bar Chart!</h1>
       <div>
         <h1>Line Chart</h1>
-        <LineChart
-          xAxis={[{ data: [0, 2, 3, 5, 8, 10] }]}
-          series={[
-            {
-              data: [2, 5.5, 2, 8.5, 1.5, 5],
-            },
-          ]}
-          width={500}
-          height={300}
-        />
+
         <br />
       </div>
     </div>

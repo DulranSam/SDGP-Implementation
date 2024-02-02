@@ -25,6 +25,15 @@ const userSchema = mongoose.Schema(
       default: "",
       trim: true,
     },
+    marks: {
+      type: Number,
+      default: 0,
+    },
+    questionHistory: {
+      type: Object,
+      default: {},
+    },
+    testHistory: { type: Object, default: {} },
     // rank: {
     //   type: Number,
     //   default: 0,

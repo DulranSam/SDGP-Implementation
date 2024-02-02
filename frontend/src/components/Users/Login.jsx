@@ -4,7 +4,7 @@ import { userContext } from "../../App";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const { setLogged } = useContext(userContext);
+  const { setIsLogged } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     username: "",
@@ -19,9 +19,9 @@ const Login = () => {
       const r = await Axios.post("http://localhost:8000/users/login", data);
       if (r.status === 200) {
         setStatus("User Logged In");
-        setLogged(true);
+        setIsLogged(true);
         navigator("/"); //go to homepage
-      } else if (r.status === 403) {
+      } else {
         setStatus("Invalid username or password");
       }
     } catch (err) {
@@ -31,22 +31,24 @@ const Login = () => {
     }
   }
 
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <h1>Login</h1>
       <br></br>
       <form onSubmit={Login}>
         <input
-          onChange={(e) => {
-            setData({ username: e.target.value });
-          }}
+          onChange={handleChange}
           placeholder="Enter Username"
+          name="username"
         ></input>
         <input
-          onChange={(e) => {
-            setData({ password: e.target.value });
-          }}
+          onChange={handleChange}
           placeholder="Enter Password"
+          name="password"
         ></input>
         <h1>{status}</h1>
         <button type="submit" disabled={loading}>

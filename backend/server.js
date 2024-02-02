@@ -21,10 +21,10 @@ const wrongQuestion = require("./routes/wrong");
 function authenticated(req, res, next) {
   if (req.session.user) {
     console.log("Authenticated!");
-    next();
   } else {
     return res.status(401).json({ Alert: "Not logged in!" });
   }
+  next();
 }
 
 app.use(cors({ origin: "*" })); //allow access from anywhere FOR NOW
@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use("/users", users);
-// app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
+app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
 app.use("/resources", learningMaterial);
 app.use("/gpts", gpt);
 app.use("/question", wrongQuestion);
