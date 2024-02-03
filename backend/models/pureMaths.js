@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const pureMathsSchema = mongoose.Schema(
   {
-    pureID: {},
+    pureID: { type: String, default: "P" },
     topic: {
       type: String,
       required: true,

@@ -4,12 +4,11 @@ async function GetUsers(req, res) {
   const { topic } = req?.body;
   try {
     if (!topic) {
-      const forumData = await forumModel.find().sort("createdAt");
+      const forumData = await forumModel.find();
       return res.status(200).json(forumData);
-    } else {
-      const topicRelated = await forumModel.find({ topic });
-      return res.status(200).json(topicRelated);
     }
+    const topicRelated = await forumModel.find({ topic });
+    return res.status(200).json(topicRelated);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ Alert: err.message });
@@ -19,7 +18,7 @@ async function GetUsers(req, res) {
 async function CreateQuestions(req, res) {
   const { question, answer, topic } = req?.body;
 
-  if (!question)
+  if (!question || !topic)
     return res.status(400).json({ Alert: "No questions or topic provided" });
 
   await forumModel.create({

@@ -6,11 +6,9 @@ import MathLive from "../Math";
 
 const ExamPage = () => {
   const [time, setTime] = useState(0);
-  const [ans, setAns] = useState([]);
   const startButtonRef = useRef();
   const stopButtonRef = useRef();
   const intervalRef = useRef();
-
   const [value, setValue] = useState("");
 
   const startExamTimer = () => {
@@ -23,24 +21,16 @@ const ExamPage = () => {
     clearInterval(intervalRef.current);
   };
 
-  const [answers, setAnswers] = useState({});
-
-  async function doneExam() {
-    try {
-      setAnswers(value);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   const sendExamData = () => {
     stopExamTimer();
     alert(`You took ${time} seconds!`);
     localStorage.setItem("time", time);
-    // Do something with the exam data, e.g., setAns(data);
+
+    //might have to set the exam marks in local storage to get in the finalized page!
+
     setTimeout(() => {
-      //2 seconds redirect!
-      navigator("/");
+      // Redirect to "/examfinal" after 2 seconds
+      window.location.href = "/examfinal"; // Update this line based on your routing mechanism
     }, 2000);
   };
 
@@ -59,7 +49,7 @@ const ExamPage = () => {
       </button>
       <MathLive />
       <div>
-        <h2>{`${time} <- Time Elapsed`}</h2>
+        <h2>{`${time} seconds <- Time Elapsed`}</h2>
         <LineChart
           xAxis={[{ data: [0, 2, 3, 5, 8, 10] }]}
           series={[
@@ -71,7 +61,6 @@ const ExamPage = () => {
           height={300}
         />
       </div>
-
       <button onClick={sendExamData} ref={stopButtonRef}>
         Done!
       </button>

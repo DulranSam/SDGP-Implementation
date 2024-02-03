@@ -29,8 +29,8 @@ function authenticated(req, res, next) {
 
 app.use(cors({ origin: "*" })); //allow access from anywhere FOR NOW
 app.use(helmet()); //to protect the api
-app.use(express.urlencoded());
-app.use(express.json());
+// app.use(express.urlencoded());
+app.use(express.json({ limit: "*" }));
 app.use(
   session({
     secret: "someencryptedkeylol123",
@@ -42,7 +42,7 @@ app.use(
 );
 
 app.use("/users", users);
-app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
+// app.use(authenticated); //when the session exists (user is authenticated) let them access the rest of the routes
 app.use("/resources", learningMaterial);
 app.use("/gpts", gpt);
 app.use("/question", wrongQuestion);

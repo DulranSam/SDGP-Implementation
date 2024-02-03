@@ -57,10 +57,10 @@ const CreateQuestion = () => {
   }
 
   async function GetQuestions() {
+    if (status !== "") {
+      setStatus("");
+    }
     try {
-      if (status !== "") {
-        setStatus("");
-      }
       setLoading(true);
       const r = await Axios.get(EndPoint);
       setData(r.data);
