@@ -3,6 +3,7 @@
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../../App";
 import { AddMaterial, FetchMaterial } from "../Api/Api";
+import Axios from "axios";
 
 const Study = () => {
   const { loading, setLoading, status, setStatus } = useContext(userContext);
@@ -16,13 +17,14 @@ const Study = () => {
 
   const fetchMaterial = async () => {
     try {
-      setLoading(true);
+      // setLoading(true); //there's an issue here!
+
       const resources = await FetchMaterial();
       setMaterial(resources);
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
@@ -54,7 +56,7 @@ const Study = () => {
   return (
     <div>
       <h1>Study Page!</h1>
-      <p>
+      <div>
         {loading ? (
           "Loading..."
         ) : material && material.length ? (
@@ -62,7 +64,7 @@ const Study = () => {
         ) : (
           <h1>No materials added yet!</h1> //we can edit the questions from here!
         )}
-      </p>
+      </div>
       <div className="addQues">
         <form onSubmit={addMaterial}>
           <input
@@ -89,7 +91,7 @@ const Study = () => {
             placeholder="Enter subtopic"
             type="text"
           ></input>
-          <button type="submit" name="Add Resource!" />
+          <button>Add Resource</button>
         </form>
       </div>
     </div>

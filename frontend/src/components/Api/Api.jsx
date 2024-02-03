@@ -32,7 +32,7 @@ export async function GPTSearch(search) {
 export async function FetchMaterial() {
   try {
     const resources = await Axios.get(`${BASE}/resources`);
-    return resources?.data;
+    return resources.data;
   } catch (err) {
     console.error(err);
   }

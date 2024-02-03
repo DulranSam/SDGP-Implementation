@@ -13,6 +13,9 @@ const Navbar = () => {
       <Link to="/" style={linkStyle}>
         Home
       </Link>
+      <Link to="/study" style={linkStyle}>
+        Learning Resources 📚
+      </Link>
       <Link to="/dash" style={linkStyle}>
         Dashboard
       </Link>

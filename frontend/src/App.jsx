@@ -52,33 +52,24 @@ function App() {
           <Navbar />
           <Gemini />
           <Routes>
-            <Route path="/" element={<HomePage></HomePage>}></Route>
+            <Route path="/" element={<HomePage />}></Route>
             <Route path="/forgot" element={<ForgotPass />}></Route>
             <Route path="/exam" element={<ExamPage />}></Route>
             <Route path="/examfinal" element={<ExamFinalized />}></Route>
             <Route path="/marker" element={<Statistical />}></Route>
-            <Route path="/mui" element={<MuiPage></MuiPage>}></Route>
+            <Route path="/mui" element={<MuiPage />}></Route>
             <Route path="/study" element={<Study />}></Route>
-            <Route path="/stat" element={<StatPage></StatPage>}></Route>
-            <Route path="/stat/addstat" element={<AddStat></AddStat>}></Route>
-            <Route path="/puremath" element={<PureMath></PureMath>}></Route>
-            <Route
-              path="/puremath/addpure"
-              element={<AddPure></AddPure>}
-            ></Route>
-            <Route
-              path="/adduser"
-              element={<CreateUsers></CreateUsers>}
-            ></Route>
-            <Route path="/viewusers" element={<ViewUsers></ViewUsers>}></Route>
-            <Route path="/forum" element={<Forum></Forum>}></Route>
-            <Route
-              path="/createforum"
-              element={<CreateQuestion></CreateQuestion>}
-            ></Route>
-            <Route path="/login" element={<Login></Login>}></Route>
-            <Route path="/gpt" element={<GPTLinked></GPTLinked>}></Route>
-            <Route path="/dash" element={<Dashboard></Dashboard>}></Route>
+            <Route path="/stat" element={<StatPage />}></Route>
+            <Route path="/stat/addstat" element={<AddStat />}></Route>
+            <Route path="/puremath" element={<PureMath />}></Route>
+            <Route path="/puremath/addpure" element={<AddPure />}></Route>
+            <Route path="/adduser" element={<CreateUsers />}></Route>
+            <Route path="/viewusers" element={<ViewUsers />}></Route>
+            <Route path="/forum" element={<Forum />}></Route>
+            <Route path="/createforum" element={<CreateQuestion />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/gpt" element={<GPTLinked />}></Route>
+            <Route path="/dash" element={<Dashboard />}></Route>
             <Route path="*" element={<Unknown />}></Route>
           </Routes>
         </userContext.Provider>

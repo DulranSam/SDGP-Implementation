@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const statSchema = mongoose.Schema(
   {
-    pureID: {},
+    statID: { type: String, default: "S" },
     topic: {
       type: String,
       required: true,

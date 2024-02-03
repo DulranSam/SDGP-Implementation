@@ -17,6 +17,7 @@ async function DeleteUsers(req, res) {
 
 async function UpdateUsers(req, res) {
   const id = req?.params?.id;
+  const {} = req?.body;
 
   if (!id) return res.status(400).json({ Alert: "No ID found" });
 
@@ -38,12 +39,14 @@ const Upvoted = async (req, res) => {
     const forumPost = await forumModel.findById(id);
 
     if (!forumPost) {
-      return res.status(400).json({ Alert: "Invalid User!" });
+      return res.status(400).json({ Alert: "Invalid Post!" });
     } else {
-      forumPost.rating = upvotes;
-
-      const updatedPost = await forumPost.save();
-      return res.status(200).json({ Alert: `Updated!`, updatedPost });
+      const updatedPost = forumPost.updateOne({ upvotes });
+      if (!updatedPost) {
+        return res.status(400).json({ Alert: "Error while updating!" });
+      } else {
+        return res.status(200).json({ updatedPost });
+      }
     }
   } catch (err) {
     console.error(err);

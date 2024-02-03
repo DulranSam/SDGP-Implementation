@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from "react";
+import Axios from "axios";
 import { userContext } from "../../App";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const datax = useContext(userContext);
-  const { user, rank } = datax;
+  const { user, rank, loading, setLoading } = datax;
 
   const [progress, setProg] = useState({
     //how we're going to predict this is something we still need to think about
@@ -13,6 +14,17 @@ const Dashboard = () => {
     puremaths: 50,
   });
   const [time, setTime] = useState("");
+
+  async function userProgress() {
+    try {
+      setLoading(true);
+      const userData = await Axios.get("http://localhost:8000/users");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const today = new Date();
   const hours = today.getHours();

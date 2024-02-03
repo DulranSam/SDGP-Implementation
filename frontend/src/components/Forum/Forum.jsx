@@ -15,14 +15,17 @@ const Forum = () => {
     try {
       setLoading(true);
       const updatedData = data.map((item) =>
-        item._id === id ? { ...item, rating: item.rating + 1 } : item
+        item._id === id ? { ...item, upvotes: item.upvotes + 1 } : item
       );
       setData(updatedData);
       const upvote = await Axios.put(`${EndPoint}/x/${id}`, {
-        rating: updatedData.find((item) => item._id === id)?.rating,
+        upvotes: updatedData,
       });
+
       if (upvote.data.response.status === 200) {
         setStatus("Upvoted!");
+      } else {
+        setStatus("Error while upvoting!");
       }
       setInterval(() => {
         navigator("/forum");
@@ -101,12 +104,12 @@ const Forum = () => {
                 {loading ? <BallTriangle /> : "Rate"}
               </button>
             </form>
-            {status}
           </div>
         ))
       ) : (
         <h1>No forum questions added yet!</h1>
       )}
+      {status}
     </div>
   );
 };

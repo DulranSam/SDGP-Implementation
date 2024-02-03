@@ -17,10 +17,16 @@ const dashboard = require("./routes/dashboard");
 const gemini = require("./routes/gemini");
 const learningMaterial = require("./routes/learn");
 const wrongQuestion = require("./routes/wrong");
+const userModel = require("./models/users");
 
-function authenticated(req, res, next) {
-  if (req.session.user) {
-    console.log("Authenticated!");
+async function authenticated(req, res, next) {
+  if (req?.session?.user) {
+    const user = req.session.user;
+    const foundUser = await userModel.findOne({ username: user.username });
+    if (!foundUser) {
+      return res.status(400).json({ Alert: "invalid user!" });
+    }
+    return res.status(200).json(foundUser);
   } else {
     return res.status(401).json({ Alert: "Not logged in!" });
   }
@@ -29,7 +35,7 @@ function authenticated(req, res, next) {
 
 app.use(cors({ origin: "*" })); //allow access from anywhere FOR NOW
 app.use(helmet()); //to protect the api
-// app.use(express.urlencoded());
+app.use(express.urlencoded());
 app.use(express.json({ limit: "*" }));
 app.use(
   session({
