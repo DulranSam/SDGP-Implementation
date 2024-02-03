@@ -62,7 +62,7 @@ const ExamPage = () => {
         />
       </div>
       <button onClick={sendExamData} ref={stopButtonRef}>
-        Done!
+        Done! 👍🏻
       </button>
     </div>
   );

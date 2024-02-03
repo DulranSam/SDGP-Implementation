@@ -3,7 +3,8 @@
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../../App";
 import { AddMaterial, FetchMaterial } from "../Api/Api";
-import Axios from "axios";
+import { Link } from "react-router-dom";
+import Materials from "./Materials";
 
 const Study = () => {
   const { loading, setLoading, status, setStatus } = useContext(userContext);
@@ -28,30 +29,9 @@ const Study = () => {
     }
   };
 
-  const addMaterial = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const resources = await AddMaterial(data);
-      if (resources.status === 201) {
-        setStatus("Added Resource!");
-      } else {
-        setStatus("Error while adding resource!");
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchMaterial();
   }, []);
-
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
 
   return (
     <div>
@@ -60,40 +40,12 @@ const Study = () => {
         {loading ? (
           "Loading..."
         ) : material && material.length ? (
-          JSON.stringify(material)
+          material.map((x) => <Materials key={x._id} data={x} />)
         ) : (
           <h1>No materials added yet!</h1> //we can edit the questions from here!
         )}
       </div>
-      <div className="addQues">
-        <form onSubmit={addMaterial}>
-          <input
-            onChange={handleChange}
-            name="topic"
-            placeholder="Enter topic"
-            type="text"
-          ></input>
-          <input
-            onChange={handleChange}
-            name="title"
-            placeholder="Enter title"
-            type="text"
-          ></input>
-          <input
-            onChange={handleChange}
-            name="about"
-            placeholder="Enter about"
-            type="text"
-          ></input>
-          <input
-            onChange={handleChange}
-            name="subtopic"
-            placeholder="Enter subtopic"
-            type="text"
-          ></input>
-          <button>Add Resource</button>
-        </form>
-      </div>
+      <Link to="/addstudy">Add Learning Resources 🤓</Link>
     </div>
   );
 };
