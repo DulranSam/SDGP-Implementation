@@ -5,6 +5,7 @@ import { userContext } from "../../App";
 import { AddMaterial, FetchMaterial } from "../Api/Api";
 import { Link } from "react-router-dom";
 import Materials from "./Materials";
+import data from "./data"
 
 const Study = () => {
   const { loading, setLoading, status, setStatus } = useContext(userContext);

@@ -51,7 +51,7 @@ const ExamPage = () => {
       <div>
         <h2>{`${time} seconds <- Time Elapsed`}</h2>
         <LineChart
-          xAxis={[{ data: [0, 2, 3, 5, 8, 10] }]}
+          xAxis={[{ data: [0, 2, 3, 5, 8, 10] }]} //possibly an mapping to the cordinates?
           series={[
             {
               data: [2, 5.5, 2, 8.5, 1.5, 5],

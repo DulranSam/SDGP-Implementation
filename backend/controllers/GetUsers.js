@@ -8,6 +8,6 @@ async function GetUsers(req, res) {
     return res.status(200).json(forumData);
   } finally {
   }
-  const topicRelated = await forumModel.find({ topic });
-  return res.status(200).json(topicRelated);
+  // const topicRelated = await forumModel.find({ topic });
+  // return res.status(200).json(topicRelated);
 }
